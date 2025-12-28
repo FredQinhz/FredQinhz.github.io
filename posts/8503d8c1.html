@@ -1,0 +1,632 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>前端面经 | Fred's Blog</title><meta name="author" content="Fred Qin"><meta name="copyright" content="Fred Qin"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="前端相关的面经八股，还在更新中ing......">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端面经">
+<meta property="og:url" content="https://fredqinhz.github.io/posts/8503d8c1.html">
+<meta property="og:site_name" content="Fred&#39;s Blog">
+<meta property="og:description" content="前端相关的面经八股，还在更新中ing......">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://fredqin.oss-cn-shanghai.aliyuncs.com/cover/frontend_interview.png">
+<meta property="article:published_time" content="2024-08-07T08:14:28.000Z">
+<meta property="article:modified_time" content="2025-12-28T17:59:36.693Z">
+<meta property="article:author" content="Fred Qin">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://fredqin.oss-cn-shanghai.aliyuncs.com/cover/frontend_interview.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "前端面经",
+  "url": "https://fredqinhz.github.io/posts/8503d8c1.html",
+  "image": "https://fredqin.oss-cn-shanghai.aliyuncs.com/cover/frontend_interview.png",
+  "datePublished": "2024-08-07T08:14:28.000Z",
+  "dateModified": "2025-12-28T17:59:36.693Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Fred Qin",
+      "url": "https://fredqinhz.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="https://fredqin.oss-cn-shanghai.aliyuncs.com/others/avatar.jpg"><link rel="canonical" href="https://fredqinhz.github.io/posts/8503d8c1.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.3"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: Fred Qin","link":"链接: ","source":"来源: Fred's Blog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '前端面经',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/custom.css"><link rel="stylesheet" href="/css/mouse.css"><link rel="stylesheet" href="/css/icon.css"><meta name="generator" content="Hexo 7.3.0"></head><body><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+btf.addGlobalFn('pjaxSend', () => {
+  Pace.restart()
+}, 'pace_restart')
+
+</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.min.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><div class="bg-animation" id="web_bg" style="background-image: url(/url(https:/fredqin.oss-cn-shanghai.aliyuncs.com/others/cat2.jpg));"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="https://fredqin.oss-cn-shanghai.aliyuncs.com/others/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">20</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/photography/"><i class="fa-fw fas fa-camera"></i><span> 摄影</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user-md"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://fredqin.oss-cn-shanghai.aliyuncs.com/cover/frontend_interview.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Fred's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">前端面经</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/photography/"><i class="fa-fw fas fa-camera"></i><span> 摄影</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user-md"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">前端面经</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-08-07T08:14:28.000Z" title="发表于 2024-08-07 16:14:28">2024-08-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-12-28T17:59:36.693Z" title="更新于 2025-12-29 01:59:36">2025-12-29</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">8.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>27分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="综合">综合</h2>
+<h3 id="栈和堆">栈和堆</h3>
+<p><strong>栈</strong></p>
+<ul>
+<li>栈的内存地址生长方向<strong>由高到低</strong></li>
+<li>栈由操作系统自动分配释放 ，用于存放<strong>函数的参数值</strong>、<strong>局部变量</strong>等</li>
+<li>栈有 2 种分配方式：<strong>静态分配</strong>和<strong>动态分配</strong>。静态分配是由操作系统完成的，比如局部变量的分配。动态分配由<code>alloca()</code>函数分配，但是栈的动态分配和堆是不同的，它的动态分配是由操作系统进行释放，无需我们手工实现。</li>
+<li>相邻变量的地址之间不会存在其它变量</li>
+</ul>
+<p><strong>堆</strong></p>
+<ul>
+<li>堆的内存地址生长方向<strong>由低到高</strong></li>
+<li>堆<strong>由开发人员分配和释放</strong>， 若开发人员不释放，程序结束时由 OS 回收，分配方式类似于链表</li>
+<li>堆都是<strong>动态分配</strong>的</li>
+</ul>
+<h3 id="抽象类和接口区别">抽象类和接口区别</h3>
+<p><strong>抽象类（abstract class）</strong></p>
+<ul>
+<li>一个抽象类<strong>不能实例化</strong></li>
+<li>可以在类的实体中定义<strong>成员变量</strong>，<strong>成员方法</strong>，<strong>构造方法</strong>等</li>
+<li><strong>抽象方法</strong>：只声明，不实现。</li>
+<li>抽象类中可以有已经实现了的方法，也可以有被abstract修饰的方法（抽象方法）</li>
+</ul>
+<p><strong>接口（interface）</strong></p>
+<ul>
+<li>接口在java中是一个抽象类型，是抽象方法的集合。从定义上看，接口是个集合，并不是类。类描述了属性和方法，而接口只包含方法（未实现的方法）。</li>
+<li>接口和抽象类一样<strong>不能被实例化</strong></li>
+<li>接口中的方法必须是<strong>抽象的</strong>，不存在方法的实现。</li>
+<li>实现某个接口的类必须在类中<strong>实现该接口的全部方法</strong>。</li>
+<li>接口中除了<strong>static</strong>、<strong>final</strong>变量，不能有其他变量</li>
+<li>接口支持<strong>多继承</strong>（一个类可以实现多个接口）</li>
+</ul>
+<h3 id="MVC-和-MVVM-的区别">MVC 和 MVVM 的区别</h3>
+<p><strong>MVC</strong></p>
+<p>MVC 是 Model View Controller 的缩写</p>
+<ul>
+<li><strong>Model：模型层</strong>，是应用程序中用于处理应用程序数据逻辑的部分。通常模型对象负责在数据库中存取数据。</li>
+<li><strong>View：视图层</strong>，用户界面渲染逻辑，通常视图是依据模型数据创建的。</li>
+<li><strong>Controller：控制器</strong>，数据模型和视图之间通信的桥梁，通常控制器负责从事图读取数据，控制用户输入，并向模型发送数据。</li>
+</ul>
+<p><strong>MVC的思想</strong>：Controller负责将Model的数据用View显示出来，换句话说就是在Controller里面把Model的数据赋值给View。</p>
+<p><strong>MVC的特点</strong>：实现关注点分离，即应用程序中的数据模型与业务和展示逻辑解耦。就是将模型和视图之间实现代码分离，松散耦合，使之成为一个更容易开发、维护和测试的客户端应用程序。</p>
+<p><strong>MVVM</strong></p>
+<p>MVVM是Model-View-ViewModel的简写，即模型-视图-视图模型。</p>
+<ul>
+<li><strong>Modal：模型</strong>，指的是后端传递的数据。</li>
+<li><strong>View：视图</strong>，指的是所看到的页面。</li>
+<li><strong>ViewModal：视图模型</strong>，mvvm模式的核心，它是连接view和model的桥梁。主要用来处理业务逻辑</li>
+</ul>
+<p>一是将模型转化成视图，即将后端传递的数据转化成所看到的页面。实现的方式是：数据绑定。</p>
+<p>二是将视图转化成模型，即将所看到的页面转化成后端的数据。实现的方式是：DOM 事件监听。</p>
+<p>这两个方向都实现的，就是数据的双向绑定。</p>
+<p><strong>MVVM的特点：</strong> 在MVVM的框架下，视图和模型是不能直接通信的，它们通过ViewModal来通信，ViewModel通常要实现一个observer观察者，当数据发生变化，ViewModel能够监听到数据的这种变化，然后通知到对应的视图做自动更新，而当用户操作视图，ViewModel也能监听到视图的变化，然后通知数据做改动，这实际上就实现了数据的双向绑定。并且MVVM中的View 和 ViewModel可以互相通信。</p>
+<p><strong>MVVM的优点</strong>：</p>
+<ul>
+<li><strong>低耦合</strong>，视图（View）可以独立于Model变化和修改，一个ViewModel可以绑定到不同的View上，当View变化的时候Model可以不变，当Model变化的时候View也可以不变。</li>
+<li><strong>可重用性</strong>，可以把一些视图逻辑放在一个ViewModel里面，让很多view重用这段视图逻辑。</li>
+<li><strong>独立开发</strong>，开发人员可以专注于业务逻辑和数据的开发（ViewModel），设计人员可以专注于页面设计，使用Expression Blend可以很容易设计界面并生成xml代码。</li>
+<li><strong>可测试</strong>，界面向来是比较难于测试的，而现在测试可以针对ViewModel来写</li>
+<li><strong>双向数据绑定</strong>，它实现了View和Model的自动同步，当Model的属性改变时，不需要手动操作Dom元素，来改变View的显示，而是改变属性后该属性对应View层显示会自动改变</li>
+</ul>
+<h3 id="和-区别（NaN-和-notdefined-会怎么样）"><code>==</code> 和 <code>===</code> 区别（NaN 和 notdefined 会怎么样）</h3>
+<ul>
+<li>相等运算符 <code>==</code> ：只判断等号两边的值是否相等，而不判断类型是否相同。值相同则返回 true</li>
+<li>全等运算符 <code>===</code> ：既要判断值是否相等，也要判断类型是否相同，即全等才能返回 true</li>
+</ul>
+<p>注意事项：</p>
+<p><strong>相等运算符【<code>==</code>】</strong></p>
+<ul>
+<li>
+<p><strong>如果其中一个值是 true，则将其转换为 1 再进行比较。如果其中一个值是 false，则将其转换为 0 再进行比较</strong></p>
+</li>
+<li>
+<p><strong>undefined 和 null 互相比较返回 true，和自身比较也返回 true</strong>，其他情况返回 false。</p>
+</li>
+<li>
+<p><strong>NaN，{} 和任意值比较都是返回 false</strong></p>
+</li>
+<li>
+<p>Infinity 只和自身比较返回 true</p>
+</li>
+<li>
+<p>如果等号两侧都是对象，则比较它们是否为同一个对象。如果指向同一个对象，则返回 true，否则返回 false</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> == <span class="string">&#x27;1&#x27;</span>  <span class="comment">// true，因为 &#x27;1&#x27; 被转换成了数字 1</span></span><br><span class="line"><span class="literal">true</span> == <span class="number">1</span>  <span class="comment">// true，因为 true 被转换成了数字 1</span></span><br><span class="line"><span class="number">100</span> == <span class="literal">true</span>　　==&gt;　　<span class="number">100</span> == <span class="number">1</span>　　<span class="comment">//　false</span></span><br><span class="line"><span class="number">0</span> == <span class="literal">false</span>　　==&gt;　　<span class="number">0</span> == <span class="number">0</span>　　<span class="comment">//　true</span></span><br><span class="line"><span class="literal">null</span> == <span class="literal">undefined</span>  <span class="comment">// true，因为它们被认为是相等的</span></span><br><span class="line"></span><br><span class="line"><span class="number">1</span> == <span class="string">&quot;abc&quot;</span>　　==&gt;　　<span class="number">1</span> == <span class="title class_">NaN</span>　　<span class="comment">//　false</span></span><br><span class="line"><span class="number">1</span> == <span class="string">&quot;&quot;</span>　　==&gt;　　<span class="number">1</span> == <span class="number">0</span>　　<span class="comment">//　false</span></span><br><span class="line"><span class="string">&quot;&quot;</span> == <span class="literal">true</span>　　==&gt;　　<span class="number">0</span> == <span class="number">1</span>　　<span class="comment">//　false</span></span><br><span class="line"><span class="string">&quot;&quot;</span> == <span class="literal">false</span>　　==&gt;　　<span class="number">0</span> == <span class="number">0</span>　　<span class="comment">//　true</span></span><br><span class="line">　　</span><br><span class="line">[<span class="number">1</span>，<span class="number">2</span>] == [<span class="number">1</span>，<span class="number">2</span>]　　<span class="comment">//　false</span></span><br><span class="line">&#123;x：<span class="number">1</span>&#125; == &#123;x：<span class="number">1</span>&#125;　　<span class="comment">//　false</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/** 如果等号一侧是Number,String,Boolean这三种类型中的一种，而另一侧是对象类型时， 则对对象执行ToPrimitive操作（这步是JS解释器执行的，ToPrimitive方法的实现，正是依次去调用对象的valueOf,toString方法，直到其中一个方法返回一个基本值，然后比较返回的基本值和另一侧那三中类型的值。如果这两个方法没有返回基本值 ，那就认定不相等 ）</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">[<span class="number">1</span>] == <span class="number">1</span>　　==&gt;　　<span class="number">1</span> == <span class="number">1</span>　　<span class="comment">//　true</span></span><br><span class="line">[<span class="number">1</span>] == <span class="string">&#x27;1&#x27;</span>　　==&gt;　　<span class="string">&#x27;1&#x27;</span> == <span class="string">&#x27;1&#x27;</span>　　<span class="comment">//　true</span></span><br><span class="line">[] == <span class="number">0</span>　　==&gt;　　<span class="number">0</span> == <span class="number">0</span>　　<span class="comment">//　true</span></span><br><span class="line">[] == <span class="string">&#x27;0&#x27;</span>　　==&gt;　　<span class="string">&#x27;&#x27;</span> == <span class="string">&#x27;0&#x27;</span>　　<span class="comment">//　false</span></span><br><span class="line">[] == <span class="string">&#x27;&#x27;</span>　　==&gt;　　<span class="string">&#x27;&#x27;</span> == <span class="string">&#x27;&#x27;</span>　　<span class="comment">//　true</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>全等运算符【<code>===</code>】</strong></p>
+<ul>
+<li>
+<p>先分析是否为相同类型，如果类型不同直接返回 false</p>
+</li>
+<li>
+<p>如果类型相同</p>
+<ul>
+<li>
+<p>基本类型，直接比较值是否相同，</p>
+</li>
+<li>
+<p>对象类型，由于对象类型保存的是对象（包括数组，函数）的地址值，所以地址值不同的，返回的都是 false。地址值相同，返回 true</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> === <span class="string">&#x27;1&#x27;</span>  <span class="comment">// false，因为类型不同</span></span><br><span class="line"><span class="literal">true</span> === <span class="number">1</span>  <span class="comment">// false，因为类型不同</span></span><br><span class="line"><span class="literal">null</span> === <span class="literal">undefined</span>  <span class="comment">// false，因为类型不同</span></span><br><span class="line"><span class="literal">undefined</span> === <span class="literal">undefined</span>  <span class="comment">// true</span></span><br><span class="line"><span class="title class_">NaN</span> === <span class="title class_">NaN</span> <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="Cookie-和-session">Cookie 和 session</h3>
+<p><strong>Cookie机制</strong></p>
+<ul>
+<li>
+<p><strong>一个用户的所有请求操作都应该属于同一个会话</strong>，而另一个用户的所有请求操作则应该属于另一个会话，二者不能混淆。</p>
+</li>
+<li>
+<p>Web应用程序是使用HTTP协议传输数据的。<strong>HTTP协议是无状态的协议。一旦数据交换完毕，客户端与服务器端的连接就会关闭，再次交换数据需要建立新的连接。这就意味着服务器无法从连接上跟踪会话</strong>。</p>
+</li>
+<li>
+<p><strong>键值对结构</strong></p>
+</li>
+<li>
+<p>每个 Cookie 的大小<strong>通常限制在 4KB 以内</strong></p>
+</li>
+<li>
+<p>可以设置过期时间。如果不设置过期时间，Cookie 在会话结束（即浏览器关闭）时失效。持久性 Cookies 可以存储较长时间</p>
+</li>
+</ul>
+<p><strong>什么是Cookie</strong></p>
+<ul>
+<li>
+<p><strong>W3C组织提出</strong>，<strong>给客户端颁发一个通行证，每人一个，无论谁访问都必须携带自己通行证。这样服务器就能从通行证上确认客户身份了。这就是Cookie的工作原理</strong>。</p>
+</li>
+<li>
+<p><strong>Cookie实际上是一小段的文本信息</strong>。客户端请求服务器，如果服务器需要记录该用户状态，就使用response向客 户端浏览器颁发一个Cookie。客户端浏览器会把Cookie保存起来。当浏览器再请求该网站时，浏览器把请求的网址连同该Cookie一同提交给服务 器。服务器检查该Cookie，以此来辨认用户状态。服务器还可以根据需要修改Cookie的内容。</p>
+</li>
+<li>
+<p><strong>Cookie具有不可跨域名性</strong>。根据Cookie规范，浏览器访问Google只会携带Google的Cookie，而不会携带Baidu的Cookie。Google也只能操作Google的Cookie，而不能操作Baidu的Cookie。</p>
+</li>
+<li>
+<p><img src="https://fredqin.oss-cn-shanghai.aliyuncs.com/interview/img0.png" alt="cookie"></p>
+</li>
+</ul>
+<p><strong>Session机制</strong></p>
+<ul>
+<li><strong>Session是服务器端使用的一种记录客户端状态的机制</strong>，使用上比Cookie简单一些，相应的也<strong>增加了服务器的存储压力</strong>。</li>
+<li><strong>客户端只存储一个 Session ID，通常通过 Cookie 或 URL 参数传递给服务器。</strong></li>
+<li><strong>Session对象是在客户端第一次请求服务器的时候创建的</strong>。</li>
+<li>注意只有访问JSP、Servlet等程序时才会创建Session，只访问HTML、IMAGE等静态资源并不会创建Session。如果尚未生成Session，也可以使用request.getSession(true)强制生成Session。</li>
+<li><strong>Session生成后，只要用户继续访问，服务器就会更新Session的最后访问时间，并维护该Session</strong>。用户每访问服务器一次，无论是否读写Session，服务器都认为该用户的Session“活跃（active）”了一次。</li>
+<li><strong>为防止内存溢出，服务器会把长时间内没有活跃的Session从内存删除。这个时间就是Session的超时时间。如果超过了超时时间没访问过服务器，Session就自动失效了。</strong></li>
+</ul>
+<p><strong>什么是Session</strong></p>
+<ul>
+<li>Session是另一种记录客户状态的机制，不同的是<strong>Cookie保存在客户端浏览器中</strong>，而<strong>Session保存在服务器上</strong>。客户端浏览器访问服务器的时候，服务器把客户端信息以某种形式记录在服务器上。这就是Session。客户端浏览器再次访问时只需要从该Session中查找该客户的状态就可以了。</li>
+<li>如果说<strong>Cookie机制是通过检查客户身上的“通行证”来确定客户身份的话，那么Session机制就是通过检查服务器上的“客户明细表”来确认客户身份。Session相当于程序在服务器上建立的一份客户档案，客户来访的时候只需要查询客户档案表就可以了。</strong></li>
+</ul>
+<h3 id="浏览器访问网站过程">浏览器访问网站过程</h3>
+<ol>
+<li>在浏览器地址栏中输入网址</li>
+<li>浏览器通过用户再地址栏中输入的URL构建HTTP请求报文</li>
+<li>浏览器发起DNS解析请求，将域名转换为IP地址</li>
+<li>浏览器将请求报文发送给服务器</li>
+<li>服务器接收请求报文，并解析</li>
+<li>服务器处理用户请求，并将处理结果封装成HTTP响应报文</li>
+<li>服务器将HTTP响应报文发送给浏览器</li>
+<li>浏览器接收服务器响应的HTTP报文，并解析</li>
+<li>浏览器解析HTML页面并展示，在解析HTML页面时遇到的新的资源需要再次发起请求</li>
+<li>最终浏览器展示出了页面</li>
+</ol>
+<h3 id="HTTP2-0-和-HTTP1-0-区别">HTTP2.0 和 HTTP1.0 区别</h3>
+<p>总的区别就是：</p>
+<ol>
+<li>HTTP/2<strong>采用二进制格式</strong>而非文本格式</li>
+<li>HTTP/2是<strong>完全多路复用</strong>的，而非有序并阻塞的——只需一个连接即可实现并行</li>
+<li>使用<strong>报头压缩</strong>，HTTP/2降低了开销</li>
+<li>HTTP/2让<strong>服务器</strong>可以<strong>将响应主动“推送”到客户端缓存</strong>中</li>
+</ol>
+<p><img src="https://fredqin.oss-cn-shanghai.aliyuncs.com/interview/http.png" alt="img"></p>
+<ul>
+<li><strong>多路复用</strong>，允许在同一TCP连接上同时发送多个HTTP请求和接收多个HTTP响应。通过多路复用，HTTP/2能够解决传统HTTP/1.1中的队头阻塞问题，并显著提高传输效率和性能。
+<ul>
+<li>客户端和服务器之间<strong>建立一条TCP连接</strong>，该连接可以<strong>承载多个并发的HTTP请求和响应</strong>。</li>
+<li>在多路复用模式下，客户端可以同时发起多个HTTP请求，这些<strong>请求会被切割成一系列的数据帧</strong>，并以无序的方式发送到服务器。</li>
+<li>服务器接收到这些数据帧后，可以<strong>并行处理它们</strong>，并以<strong>无序的方式发送相应的HTTP响应数据帧</strong>。</li>
+<li>当<strong>客户端</strong>接收到数据帧后，会<strong>根据帧的标识对它们进行重组</strong>，还原成完整的HTTP请求和响应。</li>
+</ul>
+</li>
+<li><strong>HTTP</strong> 性能优化的关键<strong>并不在于高带宽，而是低延迟</strong>。TCP 连接会随着时间进行自我「调谐」，起初会限制连接的最大速度，如果数据成功传输，会随着时间的推移提高传输的速度。这种调谐则被称为 <strong>TCP 慢启动</strong>。由于这种原因，让原本就具有突发性和短时性的 HTTP 连接变的十分低效。</li>
+<li><strong>HTTP/2</strong> 通过<strong>让所有数据流共用同一个连接</strong>，可以更有效地使用 TCP 连接，让高带宽也能真正的服务于 HTTP 的性能提升。-</li>
+</ul>
+<h3 id="GET-和-POST-请求区别">GET 和 POST 请求区别</h3>
+<p><strong>区别</strong></p>
+<ul>
+<li><strong>Get请求的数据（参数）会显示在地址栏</strong>，，而Post不会。</li>
+<li><strong>Post请求的参数存放到了请求实体Request body中</strong>，GET参数通过URL传递。</li>
+<li><strong>数据传输Post有优势：Get方式请求的数据不能超过2k，而Post 没有上限。</strong></li>
+<li><strong>浏览缓存Get有优势：Get具有数据缓存，而Post没有。</strong></li>
+<li>GET请求会被浏览器<strong>主动缓存</strong>，POST不会，要手动设置</li>
+<li>GET请求在URL中传送的参数是有<strong>长度限制</strong>的，而POST没有限制</li>
+<li><strong>GET产生一个TCP数据包；POST产生两个TCP数据包</strong></li>
+</ul>
+<p><strong>选择</strong></p>
+<ul>
+<li><strong>私密性</strong>的信息请求使用 POST（如注册、登陆）</li>
+<li><strong>查询</strong>信息使用 GET</li>
+</ul>
+<h3 id="常见状态码">常见状态码</h3>
+<ul>
+<li>200 (OK)：找到了该资源，并且一切正常。</li>
+<li>301(MOVED PERMANENTLY)：永久性重定向，表示资源已被分配了新的 URL。</li>
+<li>302 (FOUND)：临时性重定向，表示资源临时被分配了新的 URL。服务器目前从不同位置的网页响应请求，但请求者应继续使用原有位置来响应以后的请求。</li>
+<li>304 (NOT MODIFIED)：该资源在上次请求之后没有任何修改。这通常用于浏览器的缓存机制。</li>
+<li>401 (UNAUTHORIZED)：客户端无权访问该资源。这通常会使得浏览器要求用户输入用户名和密码，以登录到服务器。</li>
+<li>403 (FORBIDDEN)： 客户端未能获得授权，服务器拒绝请求。这通常是在401之后输入了不正确的用户名或密码。</li>
+<li>404 (NOT FOUND)：在指定的位置不存在所申请的资源。</li>
+<li>500 (服务器内部错误)：服务器遇到错误，无法完成请求。</li>
+<li>503 (服务不可用)：服务器目前无法使用（由于超负载或停机维护）。通常这只是暂时状态。</li>
+</ul>
+<h3 id="XSS、CSRF-和-DDoS">XSS、CSRF 和 DDoS</h3>
+<p><strong>XSS（Cross-Site Scripting）：跨站脚本攻击</strong></p>
+<ul>
+<li>
+<p><strong>跨站脚本攻击</strong>(为了和CSS区分开缩写为XSS)，是一种代码注入攻击。攻击者在目标网站上注入恶意代码，当用户登陆网站时就会执行这些恶意代码，这些脚本可以读取 cookie，session tokens，或者其它敏感的网站信息，进而危害数据安全。</p>
+</li>
+<li>
+<p>XSS 的本质是因为网站没有对恶意代码进行过滤，与正常的代码混合在一起了，浏览器没有办法分辨哪些脚本是可信的，从而导致了恶意代码的执行。</p>
+</li>
+<li>
+<p>例如：在下面逻辑中，脚本中获取了你的个人信息，并将你的个人信息发送到后端 <code>php</code> 文件中进行处理保存，这样你的个人信息就已经泄露了</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// attack.js 中的逻辑</span></span><br><span class="line"><span class="keyword">var</span> uname = $.<span class="title function_">cookie</span>(<span class="string">&#x27;username&#x27;</span>); <span class="comment">// 获取账号</span></span><br><span class="line"><span class="keyword">var</span> pwd = $.<span class="title function_">cookie</span>(<span class="string">&#x27;password&#x27;</span>); <span class="comment">// 获取密码</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 发送请求</span></span><br><span class="line">$(<span class="string">&#x27;body&#x27;</span>).<span class="title function_">appendTo</span>(<span class="string">&#x27;&lt;script src=`http://autofelix.com/index.php?username=$&#123;uname&#125;&amp;password=$&#123;pwd&#125;`&gt;&lt;/script&gt;&#x27;</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>防御方式</strong>：</p>
+<ul>
+<li><strong>纯前端渲染</strong>：我们会明确的告诉浏览器：下面要设置的内容是文本（<code>.innerText</code>），还是属性（<code>.setAttribute</code>），还是样式（<code>.style</code>）等等。浏览器不会被轻易的被欺骗，执行预期外的代码了。</li>
+<li><strong>转义 HTML</strong>：如果拼接 HTML 是必要的，就需要采用合适的转义库，对 HTML 模板各处插入点进行充分的转义</li>
+<li>使用 CSP：CSP 意为内容安全策略，它的本质是指定有效域(建立一个白名单)，告诉浏览器哪些外部资源可以加载和执行。我们只需要配置规则，如何拦截由浏览器自己来实现。</li>
+</ul>
+</li>
+</ul>
+<p><strong>CSRF（Cross-site request forgery）：跨站请求伪造</strong></p>
+<ul>
+<li>
+<p><strong>跨站请求伪造</strong>，攻击者诱导受害者进入第三方网站，在第三方网站中，向被攻击网站发送跨站请求。利用受害者在被攻击网站已经获取的注册凭证，绕过后台的用户验证，达到冒充用户对被攻击的网站执行某项操作的目的。</p>
+</li>
+<li>
+<p>由于 Cookie 中包含了用户的认证信息，当用户访问攻击者准备的攻击环境时，攻击者就可以对服务器发起 CSRF 攻击。在这个攻击过程中，攻击者借助受害者的 Cookie 骗取服务器的信任，但<strong>并不能拿到 Cookie</strong>，也看不到 Cookie 的内容。而对于服务器返回的结果，由于浏览器同源策略的限制，攻击者也无法进行解析。因此，攻击者无法从返回的结果中得到任何东西，他所能做的就是给服务器发送请求，以执行请求中所描述的命令，在服务器端直接改变数据的值，而非窃取服务器中的数据。<br>
+<img src="https://fredqin.oss-cn-shanghai.aliyuncs.com/interview/csrf.jpeg" alt="img"></p>
+</li>
+<li>
+<p><strong>防御方式</strong>：</p>
+<ul>
+<li><strong>CSRF Token</strong>：要求所有的用户请求都携带一个CSRF攻击者<strong>无法获取到的Token</strong>。服务器通过校验请求是否携带正确的Token(解密 Token,对比加密字符串以及时间戳，如果加密字符串一致且时间未过期，那么这个Token就是有效的)，来把正常的请求和攻击的请求区分开，也可以防范CSRF的攻击。</li>
+</ul>
+</li>
+<li>
+<p><strong>验证码</strong>：CSRF 攻击往往是在用户不知情的情况下构造了网络请求。而验证码会强制用户必须与应用进行交互，才能完成最终请求。</p>
+<ul>
+<li><strong>referer 检测</strong>：在 HTTP 头中有一个字段叫 Referer，它记录了该 HTTP 请求的来源地址。通过 Referer Check，可以检查请求是否来自合法的&quot;源&quot;。</li>
+</ul>
+</li>
+<li>
+<p>双重Cookie验证：因为攻击者只能利用 cookie，但是不能拿到 Cookie ，所以服务器可以在用户访问网站页面时，向请求域名注入一个Cookie，内容为随机字符串，然后当用户再次向服务器发送请求的时候，从 cookie 中取出这个字符串，添加到 URL 参数中，服务器通过对 cookie 中的数据和参数中的数据进行比较，来进行验证。缺点是如果网站存在 XSS 漏洞的，那么这种方式会失效，同时这种方式不能做到子域名的隔离。</p>
+</li>
+<li>
+<p>与XSS区别：<strong>XSS是利用合法用户获取其信息，而CSRF是伪造成合法用户发起请求</strong></p>
+</li>
+</ul>
+<p><strong>DDos（Distributed Denial of Service）：分布式拒绝服务</strong></p>
+<ul>
+<li>可以理解成<strong>大量设备</strong>利用大量的请求造成资源过载，导致服务不可用。</li>
+<li>Dos 拒绝服务 的升级版</li>
+<li><strong>常见攻击方式</strong>：
+<ul>
+<li><strong>网络层和传输层</strong>的DDoS攻击一般通过<strong>模拟大量的报文</strong>，如 ICMP, UDP, TCP 来让服务器响应，消耗服务器资源，称为<strong>基础设施层攻击</strong>。</li>
+<li><strong>展示层和应用层</strong>的DDOS攻击则通过<strong>模拟应用层的请求</strong>，如 HTTP 让服务器进行响应，称为<strong>应用层攻击</strong>。</li>
+<li><strong>SYN Flood</strong>：基础设施层攻击的一种。攻击者利用TCP协议中三次握手的机制，伪造大量的IP地址发送第一次握手的SYN包给服务器，但是由于伪造的IP地址几乎不可能存在，第三次握手无法完成，导致服务器大量端口处于SYN_RECV状态。由于服务器收不到第三次握手的报文，超时重传，重传一定次数后，才会释放连接。服务器这个状态一般称为半连接。服务器每收到一个SYN包都会将连接信息储存到一个队列中，当超过队列长度时，新来的SYN包无法被响应，服务器也就无法响应正常的tcp请求。</li>
+<li><strong>HTTP Flood(CC攻击)</strong>：应用层攻击的一种。攻击者通过控制大量“肉鸡”(被黑客成功入侵并受远程操纵的主机)或利用从互联网搜寻的大量知名HTTP代理，模拟正常用户给网站发起请求直到该网站拒绝服务为止。大部分网站会通过CDN及分布式缓存来加快服务器端响应，提升网站吞吐量，而这些HTTP请求有意避开这些缓存，需要进行多次DB查询操作或一次请求返回大量数据，加速系统资源消耗，从而拖垮后端业务处理系统，甚至连相关存储与日志收集系统也无法幸免。</li>
+</ul>
+</li>
+<li>防御方式：
+<ul>
+<li>流量清洗</li>
+<li>SYN Cookie</li>
+</ul>
+</li>
+</ul>
+<h3 id="什么是闭包？闭包的作用有哪些？">什么是闭包？闭包的作用有哪些？</h3>
+<p><strong>闭包</strong>：</p>
+<ul>
+<li>闭包就是<strong>每次调用外层函数时，临时创建的函数作用域对象</strong>。</li>
+<li>因为<strong>内层函数作用域链中包含外层函数的作用域对象</strong>，且内层函数被引用，导致内层函数不会被释放，同时它又保持着对父级作用域的引用，所以即使外层函数执行完成，外层函数的作用域也不会被立即销毁，这个时候就形成了闭包。</li>
+<li>所以闭包通常是在函数嵌套中形成的。</li>
+<li>严格来说，要满足以下<strong>四个条件</strong>：
+<ul>
+<li>有函数嵌套</li>
+<li>内部函数引用外部作用域的变量参数</li>
+<li>返回值是函数</li>
+<li>创建一个对象函数，让其长期驻留</li>
+</ul>
+</li>
+</ul>
+<p><strong>闭包的作用</strong>：</p>
+<ul>
+<li><strong>封装性</strong>：闭包可以将变量和函数封装在内部函数的作用域中，<strong>防止对外部作用域的污染（全局变量污染）</strong>，实现了<strong>数据的私有化和保护</strong>。</li>
+<li><strong>保持状态</strong>、<strong>延长生命周期</strong>：使得一个函数可以<strong>记住并操作</strong>其创建时的环境中的变量，使得<strong>即使外部函数执行完毕，内部函数仍然可以访问和修改外部函数中的变量</strong>。</li>
+<li><strong>实现柯里化</strong>：通过闭包，可以实现函数的柯里化（Currying），即将多个参数的函数转化为一系列单参数函数的过程。</li>
+</ul>
+<h3 id="什么叫继承？ES6-和-ES5-的继承有什么区别？">什么叫继承？ES6 和 ES5 的继承有什么区别？</h3>
+<h4 id="继承">继承</h4>
+<p>继承简单来说就是子类继承父类，子类可以使用父类的方法、属性。</p>
+<p><strong>特点</strong></p>
+<p>①在JS中都是通过原型实现继承的<br>
+②就近原则（如果父类和子类都有某个同名属性时，优先使用最近的属性，也就是子类的属性）</p>
+<p><strong>原型链细节</strong></p>
+<ul>
+<li>
+<p><strong><code>prototype</code></strong>：<strong>原型对象</strong>，每个构造函数都一个属性叫prototype，它叫原型，也是个对象，我们叫这个对象为原型对象</p>
+</li>
+<li>
+<p><strong><code>__proto__</code></strong>：<strong>隐式原型</strong>，可以理解为<strong>原型指针</strong>。每个对象中有一个属性叫<code>__proto__</code>，它叫隐式原型，也就是指向父级原型的指针</p>
+</li>
+<li>
+<p><strong><code>constructor</code></strong>：<strong>构造器</strong>，<strong>原型对象的constructor也就是构造函数</strong>。每个原型对象都有一个constructor属性，用于指向原型对象的构造函数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">beauty</span>(<span class="params"></span>) &#123;</span><br><span class="line">   <span class="comment">// 构造函数</span></span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">skin</span> = <span class="string">&#x27;white&#x27;</span></span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">stature</span> = <span class="string">&#x27;170&#x27;</span></span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 向原型对象上添加属性</span></span><br><span class="line"> beauty.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">realBeautiful</span> = <span class="string">&#x27;yes&#x27;</span></span><br><span class="line"> <span class="keyword">let</span> my = <span class="keyword">new</span> <span class="title function_">beauty</span>() <span class="comment">// 实例化对象</span></span><br><span class="line"> </span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(beauty.<span class="property"><span class="keyword">prototype</span></span>) <span class="comment">// 构造函数beauty的原型对象</span></span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(my) <span class="comment">// 实例对象</span></span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(beauty.<span class="property"><span class="keyword">prototype</span></span> === my.<span class="property">__proto__</span>) <span class="comment">// true；构造函数beauty的原型对象 全等于 实例对象的父级原型对象</span></span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(beauty === my.<span class="property">__proto__</span>.<span class="property">constructor</span>) <span class="comment">// true；构造函数beauty 全等于 实例对象的父级原型对象的constructor属性</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p><img src="https://fredqin.oss-cn-shanghai.aliyuncs.com/interview/proto.png" alt="img"></p>
+</li>
+</ul>
+<h4 id="ES5中继承">ES5中继承</h4>
+<ul>
+<li>
+<p><strong>原型链继承</strong>：利用原型让一个引用类型继承另一个引用类型的属性和方法。也就是让子类的原型对象等于父类的实例。</p>
+<ul>
+<li>
+<p><strong>优点</strong>：</p>
+<ul>
+<li>可以继承<strong>父类及其原型</strong>的全部<strong>属性和方法</strong></li>
+<li>实例和子类和父类在一条原型链上</li>
+</ul>
+</li>
+<li>
+<p><strong>缺点：</strong></p>
+<ul>
+<li>子类实例<strong>无法向父类传参</strong></li>
+<li>因为是通过原型实现的继承，所以父类的实例属性会变成子类的原型属性，会导致包含引用类型值的原型属性会被所有的实例共享（基本类型没有该问题）</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">ParentType</span>(<span class="params"></span>) &#123;</span><br><span class="line">   <span class="comment">// 父类</span></span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">attr</span> = <span class="literal">true</span></span><br><span class="line"> &#125;</span><br><span class="line"> <span class="title class_">ParentType</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">getAttr</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">   <span class="comment">// 向父类原型增加方法</span></span><br><span class="line">   <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">attr</span></span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">function</span> <span class="title function_">ChildType</span>(<span class="params"></span>) &#123;</span><br><span class="line">   <span class="comment">// 定义子类</span></span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">a</span> = <span class="literal">false</span></span><br><span class="line"> &#125;</span><br><span class="line"> <span class="title class_">ChildType</span>.<span class="property"><span class="keyword">prototype</span></span> = <span class="keyword">new</span> <span class="title class_">ParentType</span>() <span class="comment">// 定义其原型对象等于父类的实例</span></span><br><span class="line"></span><br><span class="line"> <span class="keyword">let</span> instance = <span class="keyword">new</span> <span class="title class_">ChildType</span>() <span class="comment">// 创建子类实例</span></span><br><span class="line"></span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(instance.<span class="property">attr</span>) <span class="comment">// true，调用父类原型中的属性，可以继承到</span></span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(instance.<span class="title function_">getAttr</span>()) <span class="comment">// true，调用父类原型中的方法，可以继承到</span></span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(instance.<span class="property">a</span>) <span class="comment">// false，使用子类原型中的属性，可以继承到</span></span><br><span class="line"> <span class="comment">// instance.constructor指向的ParentType，这是因为原来的childType.prototype被重写了的缘故。</span></span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(instance.<span class="property">constructor</span> === <span class="title class_">ParentType</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>借用构造函数继承</strong>：在子类型构造函数的内部，调用父类型的构造函数。通过call() 和 apply() 方法的作用， 改变this的指向。</p>
+<ul>
+<li>
+<p><strong>优点</strong>：</p>
+<ul>
+<li>可以<strong>向父类传参</strong></li>
+<li>因为使用的call或apply的方式，所以可以实现<strong>多继承</strong>，即一个子类继承多个父类的属性和方法</li>
+<li>解决了引用数据类型值共享的问题（<strong>引用数据类型值不共享</strong>）</li>
+</ul>
+</li>
+<li>
+<p><strong>缺点：</strong></p>
+<ul>
+<li>因为只是“借调”了构造函数，所以<strong>无法继承</strong>父类<strong>原型</strong>中的<strong>属性和方法</strong></li>
+<li>父类的属性和方法都要在父类构造函数中定义才能继承到，每次创建子类实例都重新执行一次父类的构造函数，无法实现方法的复用。（所以在实际开发中，这种继承方式很少单独使用）</li>
+</ul>
+</li>
+<li>
+<p><strong>注意</strong>：子类的私有属性，为防止被父类覆盖，应定义在call或apply之后</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">ParentType</span>(<span class="params">name</span>) &#123;</span><br><span class="line">   <span class="comment">// 父类</span></span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">attr</span> = [<span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">name</span> = name</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="title class_">ParentType</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">getAttr</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">   <span class="comment">// 向父类原型增加方法</span></span><br><span class="line">   <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">attr</span></span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">function</span> <span class="title function_">ChildType</span>(<span class="params">name</span>) &#123;</span><br><span class="line">   <span class="comment">// 定义子类</span></span><br><span class="line">   <span class="title class_">ParentType</span>.<span class="title function_">call</span>(<span class="variable language_">this</span>, name) <span class="comment">// 继承了父类</span></span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">let</span> instance1 = <span class="keyword">new</span> <span class="title class_">ChildType</span>(<span class="string">&#x27;liang&#x27;</span>) <span class="comment">// 创建子类实例</span></span><br><span class="line"> instance1.<span class="property">attr</span>.<span class="title function_">push</span>(<span class="number">3</span>)</span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(instance1.<span class="property">attr</span>) <span class="comment">// [1, 2, 3] 修改了属性值</span></span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(instance1.<span class="property">name</span>) <span class="comment">// liang, 实现了向父类传参</span></span><br><span class="line"></span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(instance1.<span class="property">getAttr</span>) <span class="comment">// undefined，未继承父类原型中的属性和方法</span></span><br><span class="line"></span><br><span class="line"> <span class="keyword">let</span> instance2 = <span class="keyword">new</span> <span class="title class_">ChildType</span>(<span class="string">&#x27;zai&#x27;</span>) <span class="comment">// 创建另一个子类实例</span></span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(instance2.<span class="property">attr</span>) <span class="comment">// [1, 2] 没有被共享引用类型值</span></span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(instance2.<span class="property">name</span>) <span class="comment">// zai, 实现了向父类传参</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>组合继承</strong>：将原型链和借用构造函数的技术组合到一起，从而发挥二者之长的一种继承方式。</p>
+<ul>
+<li>
+<p><strong>优点</strong>：</p>
+<ul>
+<li>解决了原型链的引用类型值共享的问题</li>
+<li>解决了借用构造函数无法继承原型以及构造函数中的方法无法被复用的问题</li>
+<li>是 JavaScript <strong>最常用的继承模式</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>缺点：</strong></p>
+<ul>
+<li>无论什么情况下，都会<strong>调用两次父类型的构造函数</strong>：一次是在创建子类型原型的时候（ChildType.prototype = new ParentType();），一次是在子类型构造函数内部（ParentType.call(this, name); ）</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">ParentType</span>(<span class="params">name</span>) &#123;</span><br><span class="line">   <span class="comment">// 父类</span></span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">attr</span> = [<span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">name</span> = name</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="title class_">ParentType</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">getAttr</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">   <span class="comment">// 父类原型的方法</span></span><br><span class="line">   <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">attr</span></span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">function</span> <span class="title function_">ChildType</span>(<span class="params">name</span>) &#123;</span><br><span class="line">   <span class="comment">// 定义子类</span></span><br><span class="line">   <span class="title class_">ParentType</span>.<span class="title function_">call</span>(<span class="variable language_">this</span>, name) <span class="comment">// 继承属性</span></span><br><span class="line"> &#125;</span><br><span class="line"> <span class="title class_">ChildType</span>.<span class="property"><span class="keyword">prototype</span></span> = <span class="keyword">new</span> <span class="title class_">ParentType</span>() <span class="comment">// 继承方法</span></span><br><span class="line"> <span class="title class_">ChildType</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">constructor</span> = <span class="title class_">ChildType</span> <span class="comment">// 强化继承</span></span><br><span class="line"></span><br><span class="line"> <span class="keyword">let</span> instance1 = <span class="keyword">new</span> <span class="title class_">ChildType</span>(<span class="string">&#x27;liang&#x27;</span>) <span class="comment">// 创建子类实例</span></span><br><span class="line"> instance1.<span class="property">attr</span>.<span class="title function_">push</span>(<span class="number">3</span>)</span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(instance1.<span class="property">attr</span>) <span class="comment">// [1, 2, 3] 修改了属性值</span></span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(instance1.<span class="property">name</span>) <span class="comment">// liang, 实现了向父类传参</span></span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(instance1.<span class="title function_">getAttr</span>()) <span class="comment">// [1, 2, 3]，获取父类原型中的属性和方法</span></span><br><span class="line"></span><br><span class="line"> <span class="keyword">let</span> instance2 = <span class="keyword">new</span> <span class="title class_">ChildType</span>(<span class="string">&#x27;zai&#x27;</span>) <span class="comment">// 创建另一个子类实例</span></span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(instance2.<span class="property">attr</span>) <span class="comment">// [1, 2] 没有被共享引用类型值</span></span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(instance2.<span class="property">name</span>) <span class="comment">// zai, 实现了向父类传参</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>寄生式继承</strong>：创建一个仅用于封装过程的函数，该函数在内部以某种方式来增强对象，最后再返回对象。</p>
+<ul>
+<li>
+<p><strong>说明</strong>：</p>
+<ul>
+<li>定义一个clone，clone最开始是一个空的对象，通过传入一个存在的对象，来当做自己的，寄生之意源自于此，寄生在已有的对象上。然后给他个方法，用以增强它，最后返回这个clone，clone就有了自己的方法和属性，变相的继承。</li>
+</ul>
+</li>
+<li>
+<p><strong>缺点：</strong></p>
+<ul>
+<li>为对象添加函数，无法做到函数的复用，降低效率，类似于借用构造函数方式</li>
+</ul>
+</li>
+<li>
+<p><strong>注意</strong>：里面的Object.create() 不是必须的，只要是能返回新对象的函数都适用于次模式（比如new）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">createPerson</span>(<span class="params">original</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> clone = <span class="title class_">Object</span>.<span class="title function_">create</span>(original) <span class="comment">// 原型式继承</span></span><br><span class="line">  clone.<span class="property">getName</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// 为对象添加方法</span></span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">name</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> clone</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> person = &#123;</span><br><span class="line">  <span class="comment">// 新对象原型的对象</span></span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;liang&#x27;</span>,</span><br><span class="line">  <span class="attr">frinds</span>: [<span class="string">&#x27;zhao&#x27;</span>, <span class="string">&#x27;qian&#x27;</span>],</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> instance = <span class="title function_">createPerson</span>(person) <span class="comment">// 新对象既拥有person对象的属性和方法，又拥有自己的方法</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(instance.<span class="title function_">getName</span>()) <span class="comment">// liang，调用到了新对象自己的方法</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>寄生组合式继承</strong>：使用寄生式继承来继承父类的原型，然后将结果指定给子类型的原型</p>
+<ul>
+<li>
+<p><strong>优点</strong>：</p>
+<ul>
+<li>可以实现子类实例像父类传参</li>
+<li>引用类型值不会被共享</li>
+<li>实现了函数的复用</li>
+<li>只调用了一次父类的构造函数</li>
+<li>效率高</li>
+</ul>
+</li>
+<li>
+<p><strong>总结：</strong></p>
+<ul>
+<li>解决了上述所有的缺点</li>
+<li>继承组合方式是引用类型<strong>最理想的继承方式</strong></li>
+<li>解决了组合式继承存在一个最大的问题，会调用两次父类的构造函数</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">ParentType</span>(<span class="params">name</span>) &#123;</span><br><span class="line">  <span class="comment">// 父类</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">attr</span> = [<span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">name</span> = name</span><br><span class="line">&#125;</span><br><span class="line"><span class="title class_">ParentType</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">getAttr</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="comment">// 父类原型的方法</span></span><br><span class="line">  <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">attr</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">ChildType</span>(<span class="params">name</span>) &#123;</span><br><span class="line">  <span class="comment">// 定义子类</span></span><br><span class="line">  <span class="title class_">ParentType</span>.<span class="title function_">call</span>(<span class="variable language_">this</span>, name) <span class="comment">// 继承属性</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> prototype = <span class="title class_">Object</span>.<span class="title function_">create</span>(<span class="title class_">ParentType</span>.<span class="property"><span class="keyword">prototype</span></span>) <span class="comment">// 创建一个等于父类原型对象的对象</span></span><br><span class="line">prototype.<span class="property">constructor</span> = <span class="title class_">ChildType</span> <span class="comment">// 增强对象，弥补因重写原型而失去的constructor属性</span></span><br><span class="line"><span class="title class_">ChildType</span>.<span class="property"><span class="keyword">prototype</span></span> = prototype <span class="comment">// 完成了对父类的属性和方法的继承</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> man1 = <span class="keyword">new</span> <span class="title class_">ChildType</span>(<span class="string">&#x27;liang&#x27;</span>)</span><br><span class="line">man1.<span class="property">attr</span>.<span class="title function_">push</span>(<span class="number">3</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(man1.<span class="property">name</span>) <span class="comment">// liang，继承到父类的属性</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(man1.<span class="title function_">getAttr</span>()) <span class="comment">// [1,2,3] 继承到了父类的方法</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> man2 = <span class="keyword">new</span> <span class="title class_">ChildType</span>(<span class="string">&#x27;zhao&#x27;</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(man2.<span class="property">name</span>) <span class="comment">// zhao</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(man2.<span class="title function_">getAttr</span>()) <span class="comment">// [1,2] 引用类型值没有被共享</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="ES6中继承">ES6中继承</h4>
+<p>ES6的继承实现方法，实质上是 <strong>JavaScript</strong> 现有<strong>基于原型继承</strong>的语法糖，其内部其实也是<strong>ES5寄生组合继承的方式</strong>，通过<strong>call构造函数</strong>，在<strong>子类中继承父类的属性</strong>，通过<strong>原型链来继承父类的方法</strong></p>
+<ul>
+<li>
+<p><strong>优点</strong>：</p>
+<ul>
+<li>更规范——严格模式下执行</li>
+<li>可读性高</li>
+</ul>
+</li>
+<li>
+<p><strong>注意</strong>：</p>
+<ul>
+<li>相比ES5的继承中，子类的<code>__proto__</code>属性指向的对应的构造函数的原型。ES6的Class定义的子类同时有prototype属性和<code>__proto__</code>属性，因此同时存在两条继承链：
+<ol>
+<li>子类的<code>__proto__</code>属性，表示构造函数的继承，总是指向父类</li>
+<li>子类<code>prototype</code>对象的<code>__proto__</code>属性，表示原型的继承，总是指向父类的prototype对象</li>
+</ol>
+</li>
+<li>extends做了两件事情，一个是通过<code>Object.create()</code>把子类的原型赋值为父类的实例，实现了继承方法，子类<code>.prototype.__proto__</code>也自动指向父类的原型，一个是手动修改了子类的<code>__proto__</code>，修改为指向父类，（本来在 es5 中应该是指向<code>Function.prototype</code>）</li>
+<li>extends也可以继承ES5的构造函数</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ParentType</span> &#123;</span><br><span class="line">  <span class="comment">// 父类</span></span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">param</span>) &#123;</span><br><span class="line">    <span class="comment">// 父类的构造函数</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">param</span> = param</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">attr</span> = <span class="string">&#x27;haha&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">static</span> age = <span class="number">21</span></span><br><span class="line">  <span class="keyword">static</span> <span class="title function_">showSomething</span>(<span class="params">str</span>) &#123;</span><br><span class="line">    <span class="comment">// 父类的静态方法</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(str)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">getParam</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// 原型的方法</span></span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">param</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ChildType</span> <span class="keyword">extends</span> <span class="title class_ inherited__">ParentType</span> &#123;</span><br><span class="line">  <span class="comment">// 定义子类继承父类</span></span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">param</span>) &#123;</span><br><span class="line">     <span class="variable language_">super</span>(param) <span class="comment">// 使子类获取到this对象</span></span><br><span class="line">      </span><br><span class="line">     <span class="comment">//子类添加自己的属性</span></span><br><span class="line">     <span class="variable language_">this</span>.<span class="property">childAttr</span> = <span class="string">&#x27;ca&#x27;</span></span><br><span class="line">   &#125;</span><br><span class="line">  <span class="keyword">static</span> <span class="title function_">showSth</span>(<span class="params">str</span>) &#123;</span><br><span class="line">    <span class="variable language_">super</span>.<span class="title function_">showSomething</span>(str) <span class="comment">// 通过super调用父类的函数</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> child = <span class="keyword">new</span> <span class="title class_">ChildType</span>(<span class="string">&#x27;123456&#x27;</span>) <span class="comment">// 创建实例</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">ParentType</span>.<span class="title function_">showSomething</span>(<span class="string">&#x27;lalala!&#x27;</span>) <span class="comment">// lalala! 静态方法的使用</span></span><br><span class="line"><span class="comment">// child.showSomething(&#x27;child!&#x27;) // Uncaught TypeError: child.showSomething is not a function 实例无法继承静态方法。</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;age==&gt;&#x27;</span>, <span class="title class_">ChildType</span>.<span class="property">age</span>)</span><br><span class="line"><span class="comment">// ChildType.state.age = 23</span></span><br><span class="line"><span class="comment">// ChildType.showSth(&#x27;yeah!&#x27;) // yeah! 子类可以继承父类的静态方法。</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(child.<span class="title function_">getParam</span>()) <span class="comment">// 123456 调用到了父类的方法</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">ChildType</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">__proto__</span> === <span class="title class_">ParentType</span>.<span class="property"><span class="keyword">prototype</span></span>) <span class="comment">// true</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">ChildType</span>.<span class="property">__proto__</span> === <span class="title class_">ParentType</span>) <span class="comment">// true</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://fredqinhz.github.io">Fred Qin</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://fredqinhz.github.io/posts/8503d8c1.html">https://fredqinhz.github.io/posts/8503d8c1.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://fredqinhz.github.io" target="_blank">Fred's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%AE%97%E6%B3%95/">算法</a></div><div class="post-share"><div class="social-share" data-image="https://fredqin.oss-cn-shanghai.aliyuncs.com/cover/frontend_interview.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>赞助</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="https://fredqin.oss-cn-shanghai.aliyuncs.com/others/weixinpay.jpg" target="_blank"><img class="post-qr-code-img" src="https://fredqin.oss-cn-shanghai.aliyuncs.com/others/weixinpay.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://fredqin.oss-cn-shanghai.aliyuncs.com/others/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="https://fredqin.oss-cn-shanghai.aliyuncs.com/others/alipay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/posts/a9230f8f.html" title="前端入门"><img class="cover" src="https://fredqin.oss-cn-shanghai.aliyuncs.com/cover/vue.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">前端入门</div></div><div class="info-2"><div class="info-item-1">HTML + CSS + JS标准三件套。Vue简单介绍等</div></div></div></a><a class="pagination-related" href="/posts/8abd83e.html" title="JavaScipt语法"><img class="cover" src="https://fredqin.oss-cn-shanghai.aliyuncs.com/cover/javascript.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">JavaScipt语法</div></div><div class="info-2"><div class="info-item-1">运算符 ?? Nullish 合并运算符 空值合并运算符。如果第一个参数不为 null 或 undefined 。返回第一个参数。否则，返回第二个参数。   作用：为了弥补||运算符的缺陷。  换句话说，|| 无法区分 false、0、空字符串 &quot;&quot; 和 null/undefined。它们都一样 —— 假值（falsy values）。如果其中任何一个是 || 的第一个参数，那么我们将得到第二个参数作为结果。  不过在实际中，我们可能只想在变量的值为 null/undefined 时使用默认值。也就是说，当该值确实未知或未被设置时。   123result = a ?? b;// 使用三元运算符来实现result = (a !== null &amp;&amp; a !== undefined) ? a : b; !! 等价于 Boolean() 是一种用于将任意值转换为其对应的布尔值的一种简便方式。它实际上是两个逻辑非运算符 ! 的连用。 !!a 等价于 Boolean(a)   第一个 ! 运算符：   将其后的值转换为布尔类型。   如果值是一个“假值”...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/posts/795bec56.html" title="经典算法和例题"><img class="cover" src="https://fredqin.oss-cn-shanghai.aliyuncs.com/cover/cover1.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-12-29</div><div class="info-item-2">经典算法和例题</div></div><div class="info-2"><div class="info-item-1">代码随想录  先贴个大佬链接 代码随想录网站链接  经典算法 BFS 广度优先搜索 一般过程   可以分为四个步骤：   初始化（初始化队列和所求的值） -&gt;   判空取队头（判断是否为空并取出队头） -&gt;   拓展（利用队头去扩展） -&gt;   判断入队（如果符合，将该点入队）。 1234567891011121314void bfs()&#123;    queue&lt;int&gt;q;    q.push(初始位置);    //初始化        while(q.size())&#123;        int t = q.front();        q.pop();//取出队头的点，用该点向周围扩散。        if(check(j))&#123;       //如果该点可行就将它加入队列中        q.psuh(j);		        //实施相应的操作         &#125;    &#125; &#125;      如果是对图进行广度搜索，则可以建立一个邻接表，以优化枚举时间。   如果需要记录路径，则可以设定一个路...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="https://fredqin.oss-cn-shanghai.aliyuncs.com/others/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Fred Qin</div><div class="author-info-description">南京大学软件工程专业 21本 25硕</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">20</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/FredQinhz/FredQinhz.github.io"><i class="fab fa-github"></i><span>GitHub</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://tool.gljlw.com/qqq/?qq=814532396" target="_blank" title="QQ：814532396"><i class="fab fa-qq" style="color: #0099ff;"></i></a><a class="social-icon" href="https://fredqin.oss-cn-shanghai.aliyuncs.com/others/weixin.jpg" target="_blank" title="微信：Q_y_tiao"><i class="fab fa-weixin" style="color: #07c160;"></i></a><a class="social-icon" href="https://git.nju.edu.cn/y_tiao" target="_blank" title="南大GitLab"><i class="fab fa-gitlab" style="color: #e24329;"></i></a><a class="social-icon" href="https://space.bilibili.com/2039062003" target="_blank" title="bilibili 哔哩哔哩：y_tiao"><i class="iconfont icon-bilibili"></i></a><a class="social-icon" href="https://v.douyin.com/irFDtVGh/ 4@0.com :0pm" target="_blank" title="抖音：208784591"><i class="iconfont icon-douyinzhanghao"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%BC%E5%90%88"><span class="toc-number">1.</span> <span class="toc-text">综合</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%88%E5%92%8C%E5%A0%86"><span class="toc-number">1.1.</span> <span class="toc-text">栈和堆</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3%E5%8C%BA%E5%88%AB"><span class="toc-number">1.2.</span> <span class="toc-text">抽象类和接口区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MVC-%E5%92%8C-MVVM-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.3.</span> <span class="toc-text">MVC 和 MVVM 的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%92%8C-%E5%8C%BA%E5%88%AB%EF%BC%88NaN-%E5%92%8C-notdefined-%E4%BC%9A%E6%80%8E%E4%B9%88%E6%A0%B7%EF%BC%89"><span class="toc-number">1.4.</span> <span class="toc-text">&#x3D;&#x3D; 和 &#x3D;&#x3D;&#x3D; 区别（NaN 和 notdefined 会怎么样）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cookie-%E5%92%8C-session"><span class="toc-number">1.5.</span> <span class="toc-text">Cookie 和 session</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AE%BF%E9%97%AE%E7%BD%91%E7%AB%99%E8%BF%87%E7%A8%8B"><span class="toc-number">1.6.</span> <span class="toc-text">浏览器访问网站过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTP2-0-%E5%92%8C-HTTP1-0-%E5%8C%BA%E5%88%AB"><span class="toc-number">1.7.</span> <span class="toc-text">HTTP2.0 和 HTTP1.0 区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GET-%E5%92%8C-POST-%E8%AF%B7%E6%B1%82%E5%8C%BA%E5%88%AB"><span class="toc-number">1.8.</span> <span class="toc-text">GET 和 POST 请求区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%8A%B6%E6%80%81%E7%A0%81"><span class="toc-number">1.9.</span> <span class="toc-text">常见状态码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#XSS%E3%80%81CSRF-%E5%92%8C-DDoS"><span class="toc-number">1.10.</span> <span class="toc-text">XSS、CSRF 和 DDoS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E9%97%AD%E5%8C%85%EF%BC%9F%E9%97%AD%E5%8C%85%E7%9A%84%E4%BD%9C%E7%94%A8%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-number">1.11.</span> <span class="toc-text">什么是闭包？闭包的作用有哪些？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E5%8F%AB%E7%BB%A7%E6%89%BF%EF%BC%9FES6-%E5%92%8C-ES5-%E7%9A%84%E7%BB%A7%E6%89%BF%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">1.12.</span> <span class="toc-text">什么叫继承？ES6 和 ES5 的继承有什么区别？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%A7%E6%89%BF"><span class="toc-number">1.12.1.</span> <span class="toc-text">继承</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ES5%E4%B8%AD%E7%BB%A7%E6%89%BF"><span class="toc-number">1.12.2.</span> <span class="toc-text">ES5中继承</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ES6%E4%B8%AD%E7%BB%A7%E6%89%BF"><span class="toc-number">1.12.3.</span> <span class="toc-text">ES6中继承</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/795bec56.html" title="经典算法和例题">经典算法和例题</a><time datetime="2025-12-26T15:40:57.467Z" title="发表于 2025-12-26 23:40:57">2025-12-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/db556d7f.html" title="高级编程语言设计与实现复习">高级编程语言设计与实现复习</a><time datetime="2025-12-09T05:00:40.000Z" title="发表于 2025-12-09 13:00:40">2025-12-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/4e00debc.html" title="内蒙古乌兰布统沿线自驾">内蒙古乌兰布统沿线自驾</a><time datetime="2024-09-25T04:26:30.000Z" title="发表于 2024-09-25 12:26:30">2024-09-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/cd441b.html" title="25级南京大学工程硕博专项 —— 中国华电">25级南京大学工程硕博专项 —— 中国华电</a><time datetime="2024-09-23T07:00:30.000Z" title="发表于 2024-09-23 15:00:30">2024-09-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/848707c1.html" title="中国科学院软件研究所预推免记录">中国科学院软件研究所预推免记录</a><time datetime="2024-09-13T07:00:30.000Z" title="发表于 2024-09-13 15:00:30">2024-09-13</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2024 - 2025 By Fred Qin</span></div><div class="footer_custom_text">Hi, welcome to <a href="https://fredqinhz.github.io/">Fred's blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><script src="/js/tw_cn.js?v=5.5.3"></script><div class="js-pjax"></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

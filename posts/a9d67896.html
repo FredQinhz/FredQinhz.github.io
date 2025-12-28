@@ -1,0 +1,490 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>this 关键字 | Fred's Blog</title><meta name="author" content="Fred Qin"><meta name="copyright" content="Fred Qin"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="javaScript 中 this 关键字详解，非常详尽！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="this 关键字">
+<meta property="og:url" content="https://fredqinhz.github.io/posts/a9d67896.html">
+<meta property="og:site_name" content="Fred&#39;s Blog">
+<meta property="og:description" content="javaScript 中 this 关键字详解，非常详尽！">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://fredqin.oss-cn-shanghai.aliyuncs.com/cover/javascript.png">
+<meta property="article:published_time" content="2024-08-19T11:41:30.000Z">
+<meta property="article:modified_time" content="2025-12-28T17:59:36.689Z">
+<meta property="article:author" content="Fred Qin">
+<meta property="article:tag" content="javaScript">
+<meta property="article:tag" content="this">
+<meta property="article:tag" content="原创">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://fredqin.oss-cn-shanghai.aliyuncs.com/cover/javascript.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "this 关键字",
+  "url": "https://fredqinhz.github.io/posts/a9d67896.html",
+  "image": "https://fredqin.oss-cn-shanghai.aliyuncs.com/cover/javascript.png",
+  "datePublished": "2024-08-19T11:41:30.000Z",
+  "dateModified": "2025-12-28T17:59:36.689Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Fred Qin",
+      "url": "https://fredqinhz.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="https://fredqin.oss-cn-shanghai.aliyuncs.com/others/avatar.jpg"><link rel="canonical" href="https://fredqinhz.github.io/posts/a9d67896.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.3"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: Fred Qin","link":"链接: ","source":"来源: Fred's Blog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'this 关键字',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/custom.css"><link rel="stylesheet" href="/css/mouse.css"><link rel="stylesheet" href="/css/icon.css"><meta name="generator" content="Hexo 7.3.0"></head><body><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+btf.addGlobalFn('pjaxSend', () => {
+  Pace.restart()
+}, 'pace_restart')
+
+</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.min.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><div class="bg-animation" id="web_bg" style="background-image: url(/url(https:/fredqin.oss-cn-shanghai.aliyuncs.com/others/cat2.jpg));"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="https://fredqin.oss-cn-shanghai.aliyuncs.com/others/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">20</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/photography/"><i class="fa-fw fas fa-camera"></i><span> 摄影</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user-md"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://fredqin.oss-cn-shanghai.aliyuncs.com/cover/javascript.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Fred's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">this 关键字</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/photography/"><i class="fa-fw fas fa-camera"></i><span> 摄影</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user-md"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">this 关键字</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-08-19T11:41:30.000Z" title="发表于 2024-08-19 19:41:30">2024-08-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-12-28T17:59:36.689Z" title="更新于 2025-12-29 01:59:36">2025-12-29</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/javaScript/">javaScript</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">4.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>17分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="this-关键字原理"><code>this</code> 关键字原理</h2>
+<p><strong>this 是指包含它的函数作为方法被调用时所属的对象</strong>。</p>
+<ul>
+<li>
+<p>简而言之， this 代表<strong>存在于函数的一个对象</strong>，而<strong>这个对象就是调用这个函数的那个对象</strong>。</p>
+</li>
+<li>
+<p><code>this</code> 的值<strong>取决于函数调用时的上下文</strong>（<strong>运行时绑定</strong>）</p>
+</li>
+<li>
+<p>因为函数是在一定的环境中运行的，调用函数时肯定需要知道<strong>是谁调用</strong>的，就用到了this进行指向</p>
+</li>
+</ul>
+<h2 id="严格模式与非严格模式">严格模式与非严格模式</h2>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 严格模式</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">logThis</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="string">&quot;use strict&quot;</span>;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>].<span class="title function_">forEach</span>(logThis); <span class="comment">// undefined、undefined、undefined</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 非严格模式：在浏览器上下文中</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">logThis2</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>].<span class="title function_">forEach</span>(logThis2); <span class="comment">// window、window、window</span></span><br></pre></td></tr></table></figure>
+<h2 id="使用场景">使用场景</h2>
+<h3 id="全局上下文">全局上下文</h3>
+<p>在<strong>全局执行上下文</strong>中（即，<strong>在任何函数之外</strong>），<code>this</code> 无论在严格模式还是非严格模式下，都<strong>引用全局对象</strong>。</p>
+<blockquote>
+<p>在 web 浏览器中，全局对象是 <code>window</code></p>
+<p>在 Node.js 环境中，全局对象不是 <code>window</code> 而是 <code>global</code></p>
+</blockquote>
+<p>在 web 浏览器中，全局对象是 <code>window</code>，所以 <code>this</code> 将引用 <code>window</code> 对象：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>); <span class="comment">// 在浏览器上下文中会记录 &quot;[object Window]&quot;</span></span><br></pre></td></tr></table></figure>
+<h3 id="函数上下文">函数上下文</h3>
+<h4 id="普通函数">普通函数</h4>
+<p>在普通函数内部，<code>this</code> 的值取决于函数的调用方式。如果<strong>函数在全局上下文中调用</strong>，<code>this</code> 在严格模式下将为 <code>undefined</code>，在非严格模式下将引用<strong>全局对象</strong>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">&#x27;globalName&#x27;</span>;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">func</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> name = <span class="string">&#x27;varName&#x27;</span>;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">name</span>);   <span class="comment">// this.name =&gt; &#x27;globalName&#x27;</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>);        <span class="comment">// Window &#123;frames: Window, postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, …&#125;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">func</span>(); <span class="comment">// this 在非严格模式的浏览器上下文中记录 &quot;[object Window]&quot;，在严格模式下会记录 &quot;undefined&quot;</span></span><br></pre></td></tr></table></figure>
+<h4 id="函数充当对象的方法">函数充当对象的方法</h4>
+<p>当函数充当对象的方法时，<code>this</code> 将引用<strong>调用该方法的对象</strong>。这展示了 <code>this</code> 的值不绑定于函数本身，而是由函数被调用的方式和位置决定，这个概念称为<strong>执行上下文</strong>。</p>
+<h5 id="一层作用域链">一层作用域链</h5>
+<p><code>this</code> 指的<strong>该对象</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> prop = <span class="string">&#x27;globalHello&#x27;</span>;</span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  <span class="attr">prop</span>: <span class="string">&quot;Hello&quot;</span>,</span><br><span class="line">  <span class="attr">func</span>: <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">prop</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">obj.<span class="title function_">func</span>(); <span class="comment">// 记录 &quot;Hello&quot;</span></span><br></pre></td></tr></table></figure>
+<h5 id="多层作用域链">多层作用域链</h5>
+<p><code>this</code> 指的是<strong>距离方法最近的一层对象</strong>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> prop = <span class="string">&quot;globalHello&quot;</span>;</span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  <span class="attr">prop</span>: <span class="string">&quot;Hello&quot;</span>,</span><br><span class="line">  <span class="attr">obj1</span>:&#123;</span><br><span class="line">    <span class="attr">prop</span>: <span class="string">&quot;innerHello&quot;</span>,</span><br><span class="line">    <span class="attr">func</span>: <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">prop</span>); <span class="comment">// this.prop =&gt; &quot;innerHello&quot;</span></span><br><span class="line">  	&#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">obj.<span class="property">obj1</span>.<span class="title function_">func</span>(); <span class="comment">// 记录 &quot;innerHello&quot;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：如果 <code>obj.obj1.func</code> 这个结果赋值给一个变量 <code>obj2</code>，则 <code>obj2()</code> 的值是多少呢？</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> func1 = obj.<span class="property">obj1</span>.<span class="property">func</span>;</span><br><span class="line"><span class="title function_">func1</span>(); <span class="comment">// this.prop =&gt; &quot;globalHello&quot;</span></span><br></pre></td></tr></table></figure>
+<p>答案是 “globalHello”，这个是因为<strong>经过赋值操作时，并未发起函数调用</strong>，<code>obj2()</code>这个才是真正的调用，而 **发起这个调用的是根对象 **<code>window</code> ，所以 <code>this</code> 指的就是 <code>window</code></p>
+</blockquote>
+<h4 id="匿名函数自调【立即调用（IIFE）】">匿名函数自调【立即调用（IIFE）】</h4>
+<p><code>this</code> 指向的是<strong>全局对象</strong></p>
+<p>即便<strong>在多层作用域链当中，也指向全局对象</strong></p>
+<blockquote>
+<p>注意：在 立即调用（IIFE） 当中</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    <span class="attr">func</span>: (<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">       <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">prop</span>); </span><br><span class="line">    &#125;)()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此时的 <code>obj.func</code> 并<strong>不是一个函数</strong>，而是<strong>立即执行函数（IIFE）的结果</strong>。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> prop = <span class="string">&quot;globalHello&quot;</span>;</span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  <span class="attr">prop</span>: <span class="string">&quot;Hello&quot;</span>,</span><br><span class="line">  <span class="attr">func</span>: (<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">prop</span>);  <span class="comment">// this.prop =&gt; &quot;globalHello&quot;</span></span><br><span class="line">  &#125;)()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">obj.<span class="property">func</span>; <span class="comment">// obj.func 实际上并不是一个函数，而是立即执行函数（IIFE）的结果。</span></span><br><span class="line"><span class="comment">// 因为在对象 obj 中定义 prop 属性时，prop 直接被赋值为一个立即执行函数的返回值，而不是一个函数引用。</span></span><br></pre></td></tr></table></figure>
+<p>立即调用的匿名函数<strong>有几种常见写法</strong></p>
+<ul>
+<li>
+<p><strong>传统的括号包裹法</strong></p>
+<ul>
+<li>这是最常见的 IIFE 写法，通过在函数表达式外面加一对圆括号 <code>()</code>，然后再在最后加一对圆括号 <code>()</code> 来调用它。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 先用()包起来，然后再后面跟 (参数) </span></span><br><span class="line">(<span class="keyword">function</span>(<span class="params">data</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(data);</span><br><span class="line">&#125;)(<span class="string">&quot;111&quot;</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>通过 <code>()</code> 直接调用</strong></p>
+<ul>
+<li>这种方式与第一种非常相似，只是将调用部分的括号放在函数表达式内部。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">先后面跟(参数),然后再()包起来</span><br><span class="line">(<span class="keyword">function</span>(<span class="params">data</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(data);</span><br><span class="line">&#125;(<span class="string">&quot;222&quot;</span>));</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>使用一元操作符</strong></p>
+<ul>
+<li>可以使用一元操作符 <code>!</code>、<code>+</code>、<code>-</code>、<code>~</code> 来触发函数的立即调用。尽管不常用，但这是合法的 JavaScript 语法。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 正常函数格式，前面加 一元操作符</span></span><br><span class="line">!<span class="keyword">function</span>(<span class="params">data</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(data);</span><br><span class="line">&#125;(<span class="string">&quot;333&quot;</span>);</span><br><span class="line"></span><br><span class="line">+<span class="keyword">function</span>(<span class="params">data</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(data);</span><br><span class="line">&#125;(<span class="string">&quot;333&quot;</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>通过 <code>void</code> 操作符</strong></p>
+<ul>
+<li>使用 <code>void</code> 操作符也可以立即调用匿名函数。<code>void</code> 操作符返回 <code>undefined</code>，因此常用于不关心返回值的场景。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 正常函数格式，前面加 void</span></span><br><span class="line"><span class="keyword">void</span> <span class="keyword">function</span>(<span class="params">data</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(data);</span><br><span class="line">&#125;(<span class="string">&quot;444&quot;</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>自执行箭头函数（ES6）</strong></p>
+<ul>
+<li>在 ES6 中，也可以用箭头函数来创建 IIFE，不过由于箭头函数的语法特点，需要注意将整个函数表达式包裹起来。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(data);</span><br><span class="line">&#125;) (<span class="string">&quot;111&quot;</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="定时器中调用">定时器中调用</h4>
+<p><code>this</code> 指向的是<strong>全局变量</strong></p>
+<p>其实定时器的本质，也是一种匿名函数的形式。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> prop = <span class="string">&quot;globalHello&quot;</span>;</span><br><span class="line"><span class="keyword">var</span> obj = <span class="built_in">setInterval</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="attr">prop</span>: <span class="string">&quot;Hello&quot;</span>,</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">prop</span>); <span class="comment">// // this.prop =&gt; &quot;globalHello&quot;</span></span><br><span class="line">  <span class="built_in">clearInterval</span>(cat);</span><br><span class="line">&#125;, <span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="箭头函数调用">箭头函数调用</h4>
+<p><strong>箭头函数不具有自己的 <code>this</code>。相反，它们从创建时非箭头函数的父作用域继承 <code>this</code></strong></p>
+<p>在其周围的作用域上创建一个 <code>this</code> 值的闭包：</p>
+<ul>
+<li>如果箭头函数<strong>被非箭头函数包含</strong>，则 <code>this</code> 绑定的是<strong>最近一层非箭头函数的 <code>this</code></strong></li>
+<li>否则 <code>this</code> 的值则被设置为<strong>全局对象</strong></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> prop = <span class="string">&quot;globalHello&quot;</span>;</span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    <span class="attr">prop</span>: <span class="string">&quot;Hello&quot;</span>,</span><br><span class="line">    <span class="attr">func1</span>: <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">         <span class="comment">// var self = this;</span></span><br><span class="line">        <span class="keyword">var</span> <span class="title function_">anonymousFunc</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">            <span class="comment">// console.log(self.prop); // 与下面相等</span></span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">prop</span>); <span class="comment">// 绑定到 function() 的 this。即函数充当对象的方法时，this 引用调用该方法的对象</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="title function_">anonymousFunc</span>();</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">func2</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">prop</span>); <span class="comment">// 未被非箭头函数包含，this设置为全局对象</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.<span class="title function_">func1</span>(); <span class="comment">// &quot;Hello&quot;</span></span><br><span class="line">obj.<span class="title function_">func2</span>(); <span class="comment">// &quot;globalHello&quot;</span></span><br></pre></td></tr></table></figure>
+<h4 id="回调函数调用">回调函数调用</h4>
+<p><code>this</code> 指向的<strong>全局对象</strong></p>
+<p>因为本质上是在函数内 callback ，是<strong>以普通函数调用的方式</strong>执行的。【存疑，网上并未找到直接相关结果。GPT给出的答案】</p>
+<p>下面的 ”勘误“ 部分给出了具体情境的不同详细例子，希望能有所帮助。</p>
+<h5 id="勘误">勘误</h5>
+<p>有些博主文章说：<code>this</code> 指向的执行上下文并 <em>不是回调函数定义时</em> 的那个上下文，而是 <em>调用它的函数</em> 所在的上下文。</p>
+<p>乍一看有点道理，但是实际代码验证一下就发现不对。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> funObj = &#123;</span><br><span class="line">  <span class="attr">excuteCallbackInner</span>: <span class="keyword">function</span>(<span class="params">callback</span>)&#123;</span><br><span class="line">    <span class="title function_">callback</span>();</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">callback</span>: <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;funObj.callback&#x27;s this is: &quot;</span> + <span class="variable language_">this</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">excuteCallback</span>(<span class="params">callback</span>) &#123;</span><br><span class="line">  <span class="title function_">callback</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  <span class="attr">data</span>: <span class="number">100</span>,</span><br><span class="line">  <span class="attr">func</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// 第1个例子</span></span><br><span class="line">    <span class="title function_">excuteCallback</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;global excuteCallback&quot;</span> + <span class="variable language_">this</span>); <span class="comment">// global excuteCallback[object global/window]</span></span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="comment">// 第2个例子：排除 调用者 上下文的影响</span></span><br><span class="line">    funObj.<span class="title function_">excuteCallbackInner</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;funObj.excuteCallbackInner&quot;</span> + <span class="variable language_">this</span>); <span class="comment">// funObj.excuteCallbackInner[object global/window]</span></span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="comment">// 第3个例子：排除 回调函数自身 上下文的影响</span></span><br><span class="line">    <span class="title function_">excuteCallback</span>(funObj.<span class="property">callback</span>); <span class="comment">// funObj.callback&#x27;s this is: [object global/window]</span></span><br><span class="line">    <span class="comment">// 第4个例子：排除 回调函数自身 和 调用者 上下文的影响</span></span><br><span class="line">    funObj.<span class="title function_">excuteCallbackInner</span>(funObj.<span class="property">callback</span>); <span class="comment">// funObj.callback&#x27;s this is: [object global/window]</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 函数充当对象的方法，this 指向距离最近的对象</span></span><br><span class="line">    funObj.<span class="title function_">callback</span>(); <span class="comment">// funObj.callback&#x27;s this is: [object Object]  【this =&gt; funObj】</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.<span class="title function_">func</span>();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>所有的例子都在 <code>obj.func() </code> 内部完成。可以看到所有回调函数当中的 <code>this</code> 都指向<strong>全局对象</strong></p>
+</li>
+<li>
+<p><code> excuteCallback()</code> ：该<strong>全局函数</strong>接受一个<strong>匿名回调函数的参数</strong>并直接调用它。</p>
+<ul>
+<li><strong>符合</strong> “this指向调用它的函数所在的上下文” 的说法。</li>
+<li>此时的 <code> excuteCallback()</code> 函数处于<strong>全局上下文</strong>，因此 <code>this</code> 指向 <strong>全局对象</strong></li>
+</ul>
+</li>
+<li>
+<p><code>funObj.excuteCallbackInner()</code>：该<strong>方法中的函数</strong>接受一个<strong>匿名回调函数的参数</strong>并直接调用它。</p>
+<ul>
+<li><strong>不符合</strong> “this指向调用它的函数所在的上下文” 的说法。</li>
+<li><strong>排除 调用者 上下文的影响</strong></li>
+<li>此时调用它的函数应该是 <code>funObj.excuteCallbackInner()</code> ，调用者内 <code>this</code> 指向 <code>funObj</code> 对象的上下文。</li>
+<li>然而回调函数当中 <code>this</code> 仍然指向<strong>全局对象</strong>。</li>
+</ul>
+</li>
+<li>
+<p><code> excuteCallback(funObj.callback)</code> ：该<strong>全局函数</strong>接受一个 <strong><code>funObj.callback</code>的参数</strong> 并直接调用它。</p>
+<ul>
+<li><strong>排除 回调函数自身 上下文的影响</strong></li>
+<li>此时传入的参数为 <code>funObj</code> 对象的函数，回调函数自身内部 <code>this</code> 指向  <code>funObj</code> 对象的上下文。【严格来说此时还不叫回调函数】</li>
+<li>然而回调函数当中 <code>this</code> 仍然指向<strong>全局对象</strong>。</li>
+</ul>
+</li>
+<li>
+<p><code>funObj.excuteCallbackInner(funObj.callback)</code>：该<strong>方法中的函数</strong>接受一个 <strong><code>funObj.callback</code>的参数</strong> 并直接调用它。</p>
+<ul>
+<li><strong>排除 回调函数自身 和 调用者 上下文的影响</strong></li>
+</ul>
+</li>
+<li>
+<p><code>funObj.callback() </code> ：函数充当对象的方法，this 指向距离最近的对象。详见上文。</p>
+</li>
+</ul>
+<blockquote>
+<p>得出结论：无论从什么角度，都可以说明<strong>回调函数当中 <code>this</code> 指向全局对象</strong>。</p>
+<p>如有异议，欢迎联系博主讨论。</p>
+</blockquote>
+<h5 id="this指向问题解决">this指向问题解决</h5>
+<ul>
+<li>
+<p><strong>使用箭头函数</strong>：利用箭头函数的继承机制【<strong>绑定最近一层非箭头函数的</strong> <code>this</code>】</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">excuteCallback</span>(<span class="params">callback</span>) &#123;</span><br><span class="line">  <span class="title function_">callback</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  <span class="attr">data</span>: <span class="number">100</span>,</span><br><span class="line">  <span class="attr">func</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="title function_">excuteCallback</span>(<span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>)); <span class="comment">// this =&gt; &#123; data: 100, func: [Function: func] &#125;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.<span class="title function_">func</span>();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>箭头函数内的 <code>this</code> 绑定成了 <code>function()</code> 内的 <code>this</code>：<strong>指向对象 <code>obj</code></strong></li>
+</ul>
+</li>
+<li>
+<p><strong>使用 <code>var self = this</code></strong> ：在回调函数调用之前，保存一下 <code>this</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">excuteCallback</span>(<span class="params">callback</span>) &#123;</span><br><span class="line">  <span class="title function_">callback</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  <span class="attr">data</span>: <span class="number">100</span>,</span><br><span class="line">  <span class="attr">func</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> self = <span class="variable language_">this</span>;</span><br><span class="line">    <span class="title function_">excuteCallback</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(self);  <span class="comment">// self =&gt; &#123; data: 100, func: [Function: func] &#125;, this =&gt; global</span></span><br><span class="line">    &#125;); </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.<span class="title function_">func</span>();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用变量 <code>self</code> 提前保存 <code>this</code> 以供后续调用。</li>
+</ul>
+</li>
+<li>
+<p>使用 <strong><code>.bind()</code> 方法永久绑定</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">excuteCallback</span>(<span class="params">callback</span>) &#123;</span><br><span class="line">  <span class="title function_">callback</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  <span class="attr">data</span>: <span class="number">100</span>,</span><br><span class="line">  <span class="attr">func</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="title function_">excuteCallback</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>);  <span class="comment">// this =&gt; &#123; data: 100, func: [Function: func] &#125;</span></span><br><span class="line">    &#125;.<span class="title function_">bind</span>(<span class="variable language_">this</span>)); </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.<span class="title function_">func</span>();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在参数传入之前，<strong>对匿名回调函数进行处理</strong>。</li>
+<li>使用 <code>.bind()</code> 方法永久绑定 该回调函数内部 的 <code>this</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="构造函数上下文">构造函数上下文</h3>
+<p><code>this</code> 引用<strong>实例化的新对象</strong></p>
+<p>在构造函数内部，this 引用<strong>新创建的对象</strong>。但是，这里的“新创建”是什么意思呢？要理解这一点，我们需要探讨 JavaScript 中的 new 关键字。</p>
+<blockquote>
+<p>当你在函数调用之前使用 new 时，它告诉 JavaScript 进行四个操作：</p>
+<ol>
+<li>创建一个新的空对象。这不是一个函数、数组或 null，只是一个空对象。</li>
+<li>使函数内部的 <code>this</code> 引用这个新对象。新对象与构造函数内的 <code>this</code> 关联起来。这就是为什么 <code>Person(name)</code> 内的 <code>this.name</code> 实际上修改了新对象。</li>
+<li>正常执行函数。它像通常情况下执行函数代码一样执行。</li>
+<li>如果函数没有返回自己的对象，则返回新对象。<strong>如果构造函数返回一个对象，那个对象将被返回</strong>，而不是新对象。<strong>如果返回其他任何内容，将返回新对象</strong>。</li>
+</ol>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">&quot;globalName&quot;</span>;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span>(<span class="params">name</span>) &#123;</span><br><span class="line">  <span class="comment">// 当使用 `new` 调用时，这是一个新的、空的对象</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">name</span> = name; <span class="comment">// `this` 现在有一个 `name` 属性</span></span><br><span class="line">  <span class="comment">// 函数结束后，将返回 `this`，因为没有其他对象被函数返回</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> p = <span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&#x27;Fred&#x27;</span>); <span class="comment">// `p` 现在是函数 `Person` 返回的对象，包含一个值为 &#x27;Fred&#x27; 的 `name` 属性</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(p.<span class="property">name</span>); <span class="comment">// 记录 &quot;Fred&quot;</span></span><br></pre></td></tr></table></figure>
+<h3 id="原型方法上下文">原型方法上下文</h3>
+<p><code>this</code> 指向<strong>调用该方法的实例</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span>(<span class="params">name</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">sayHello</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`Hello, my name is <span class="subst">$&#123;<span class="variable language_">this</span>.name&#125;</span>`</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> person = <span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&#x27;Alice&#x27;</span>);</span><br><span class="line">person.<span class="title function_">sayHello</span>();  <span class="comment">// 输出: Hello, my name is Alice</span></span><br></pre></td></tr></table></figure>
+<h3 id="类上下文">类上下文</h3>
+<p>在类中，方法内部的 <code>this</code> 引用<strong>类的实例</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ExampleClass</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">value</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">value</span> = value;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">logValue</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">value</span>); <span class="comment">// this.value =&gt; 类的实例的 value 属性</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> exampleInstance = <span class="keyword">new</span> <span class="title class_">ExampleClass</span>(<span class="string">&#x27;Hello&#x27;</span>);</span><br><span class="line">exampleInstance.<span class="title function_">logValue</span>(); <span class="comment">// 记录 &quot;Hello&quot;</span></span><br></pre></td></tr></table></figure>
+<h3 id="显式绑定-this">显式绑定 <code>this</code></h3>
+<p>可以使用函数上的 <code>.call()</code>、<code>.apply()</code> 或 <code>.bind()</code> 方法来<strong>明确设置 <code>this</code> 的上下文</strong></p>
+<p><code>call</code> 和 <code>apply</code> 是函数的内置方法，显式的<strong>修改了prototype原型</strong>，用于<strong>调用一个函数并显式地设置该函数内部的 <code>this</code> 值</strong>。这两个方法的功能非常相似，<strong>区别在于它们处理参数的方式不同</strong>。</p>
+<ul>
+<li>
+<p><strong><code>.call()</code> 方法</strong></p>
+<ul>
+<li><strong>语法</strong>：<code>function.call(thisArg, arg1, arg2, ...)</code></li>
+<li><strong>用途</strong>：<code>call</code> 方法可以<strong>调用一个函数</strong>，并且可以指定 <code>this</code> 的值，还可以<strong>直接传递多个参数</strong>。</li>
+</ul>
+</li>
+<li>
+<p><strong><code>.apply()</code> 方法</strong></p>
+<ul>
+<li>
+<p>用于<strong>调用一个函数</strong>，并显式设置 <code>this</code> 的值，同时传递参数。</p>
+</li>
+<li>
+<p><strong>语法</strong>：<code>function.apply(thisArg, [argsArray])</code></p>
+</li>
+<li>
+<p><strong>用途</strong>：<code>apply</code> 方法与 <code>call</code> 类似，但不同的是，<code>apply</code> <strong>接受一个包含多个参数的数组</strong>，而不是单独传递参数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//此处声明若用let，则第一个调用函数输出undefined，</span></span><br><span class="line"><span class="comment">//因为此处let声明的变量虽然也是全局变量但其不会成为全局对象window的属性，故say()直接调用时为undefined</span></span><br><span class="line"><span class="keyword">var</span> word = <span class="string">&quot;我是window&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">say</span>(<span class="params">params1,params2</span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(params1 + <span class="string">&quot; &quot;</span> + params2 + <span class="string">&quot;，&quot;</span>+ <span class="variable language_">this</span>.<span class="property">word</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">    <span class="attr">word</span>: <span class="string">&quot;我是obj&quot;</span>	</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> newObj= &#123;</span><br><span class="line">    <span class="attr">word</span>: <span class="string">&quot;我是newObj&quot;</span>	</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">say</span>(<span class="string">&quot;Hi&quot;</span>,<span class="string">&quot;friend&quot;</span>);                <span class="comment">// Hi friend，我是window  </span></span><br><span class="line">say.<span class="title function_">call</span>(obj,<span class="string">&quot;Hi&quot;</span>,<span class="string">&quot;friend&quot;</span>)        <span class="comment">// Hi friend，我是obj</span></span><br><span class="line">say.<span class="title function_">apply</span>(newObj,[<span class="string">&quot;Hi&quot;</span>,<span class="string">&quot;friend&quot;</span>])  <span class="comment">// Hi friend，我是newObj</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li>
+<p><strong><code>.bind()</code> 方法</strong></p>
+<ul>
+<li><strong>语法</strong>：<code>function.bind(thisArg, arg1, arg2, ...)</code></li>
+<li><strong>用途</strong>：<strong>返回一个新的函数</strong>，这个新函数的 <code>this</code> 永远绑定到提供的值，并且可以<strong>预设部分参数</strong>。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> word = <span class="string">&quot;我是window&quot;</span>;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">say</span>(<span class="params">params1,params2</span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(params1 + <span class="string">&quot; &quot;</span> + params2 + <span class="string">&quot;，&quot;</span>+ <span class="variable language_">this</span>.<span class="property">word</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">    <span class="attr">word</span>: <span class="string">&quot;我是obj&quot;</span>	</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> bindSay = say.<span class="title function_">bind</span>(obj, <span class="string">&quot;Hi&quot;</span>); <span class="comment">// &quot;a1&quot; 是预设的参数，会在 bindFunc 被调用时作为第一个参数传递给 func。</span></span><br><span class="line"><span class="title function_">bindSay</span>(<span class="string">&quot;friend&quot;</span>);  <span class="comment">// Hi friend，我是obj</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> obj1 = &#123;</span><br><span class="line">    <span class="attr">word</span>: <span class="string">&quot;我是obj1&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 尝试使用 call() 方法更改上下文；但是，它仍然使用 obj 作为 `this` 上下文。并且预设参数已经确定</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(bindSay.<span class="title function_">call</span>(obj1, <span class="string">&quot;Hi&quot;</span>, <span class="string">&quot;friend&quot;</span>)); <span class="comment">// Hi Hi，我是obj</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>另外的，<code>.apply()</code> 方法有一些<strong>典型的使用场景</strong></p>
+<ul>
+<li>
+<p><strong>借用对象的方法</strong></p>
+<ul>
+<li><code>apply()</code> 让 <code>person.greet</code> 使用 <code>anotherPerson</code> 的 <code>this</code> 上下文。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> person = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;Alice&#x27;</span>,</span><br><span class="line">  <span class="attr">greet</span>: <span class="keyword">function</span>(<span class="params">greeting, punctuation</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;greeting&#125;</span>, <span class="subst">$&#123;<span class="variable language_">this</span>.name&#125;</span><span class="subst">$&#123;punctuation&#125;</span>`</span>; <span class="comment">// 模板字符串</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> anotherPerson = &#123; <span class="attr">name</span>: <span class="string">&#x27;Bob&#x27;</span> &#125;;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(person.<span class="property">greet</span>.<span class="title function_">apply</span>(anotherPerson, [<span class="string">&#x27;Hello&#x27;</span>, <span class="string">&#x27;!&#x27;</span>])); <span class="comment">// Hello, Bob!</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>应用于函数参数的转换</strong></p>
+<ul>
+<li>
+<p><code>apply</code> 可以方便地<strong>将数组元素作为函数参数传递</strong>，常用于需要<strong>将参数数组展开</strong>的情况，比如 <code>Math.max</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> numbers = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</span><br><span class="line"><span class="keyword">const</span> max = <span class="title class_">Math</span>.<span class="property">max</span>.<span class="title function_">apply</span>(<span class="literal">null</span>, numbers); <span class="comment">// 输出: 5</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>可以用于<strong>合并数组</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> array1 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="keyword">var</span> array2 = [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>];</span><br><span class="line"><span class="keyword">var</span> mergedArray1 = array1.<span class="property">push</span>.<span class="title function_">apply</span>(array1, array2); <span class="comment">// 第一个参数是 this 值，即 push 方法的上下文</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(mergedArray1)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 其他合并方式: 使用拓展运算符 ...</span></span><br><span class="line"><span class="keyword">var</span> mergedArray2 = [...array1, ...array2];</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(mergedArray2);  <span class="comment">// mergedArray2 =&gt; [1, 2, 3, 4, 5, 6]</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="事件处理程序上下文">事件处理程序上下文</h3>
+<p><code>this</code> 引用<strong>附加了事件监听器的元素</strong>，与 <code>event.currentTarget</code> 相同。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;button <span class="keyword">class</span>=<span class="string">&quot;button&quot;</span>&gt;onclick&lt;/button&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">&quot;list&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="keyword">var</span> button = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;button&#x27;</span>); <span class="comment">// 选择第一个 &lt;button&gt; 元素</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    button.<span class="property">onclick</span> = <span class="keyword">function</span>(<span class="params">ev</span>)&#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span> === ev.<span class="property">currentTarget</span>); <span class="comment">// true</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    &#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="keyword">var</span> list = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.list&#x27;</span>); <span class="comment">// 通过类名选择</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    list.<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="keyword">function</span>(<span class="params">ev</span>)&#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span> === list); <span class="comment">// true</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span> === ev.<span class="property">currentTarget</span>); <span class="comment">// true</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="variable language_">console</span>.<span class="title function_">log</span>(ev.<span class="property">target</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    &#125;, <span class="literal">false</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p><strong>注意！</strong></p>
+<p>它不引用常用的 <code>event.target</code> 属性。让我们<strong>澄清 <code>event.currentTarget</code> 和 <code>event.target</code> 之间的区别。</strong></p>
+<ul>
+<li>
+<p><code>event.currentTarget</code>：该属性引用<strong>附加了事件处理程序（如 <code>addEventListener</code>）的元素</strong>。这是在事件处理程序函数的上下文中 this 引用的内容。</p>
+</li>
+<li>
+<p><code>event.target</code>：该属性引用<strong>引发事件的实际 DOM 元素</strong>。<strong>对于会冒泡的事件特别重要</strong>。如果你点击内部元素，事件将冒泡到外部元素，触发它们的事件监听器。对于这些外部元素，<code>event.target</code> 将是实际被点击的最内层元素，而 <code>event.currentTarget</code>（或 <code>this</code>）将是当前处理程序附加到的元素。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;outer&quot;</span>&gt;</span>点击我</span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;inner&quot;</span>&gt;</span>或者点击我<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;outer&#x27;</span>).<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="keyword">function</span>(<span class="params">event</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;currentTarget: &quot;</span>, event.<span class="property">currentTarget</span>.<span class="property">id</span>);</span></span><br><span class="line"><span class="language-javascript">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;this: &quot;</span>, <span class="variable language_">this</span>.<span class="property">id</span>);</span></span><br><span class="line"><span class="language-javascript">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;target: &quot;</span>, event.<span class="property">target</span>.<span class="property">id</span>);</span></span><br><span class="line"><span class="language-javascript">&#125;);</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>在这种情况下，如果你<strong>点击外部 div</strong>，所有三个日志都将打印 “outer”，因为点击的元素（<code>target</code>）和处理程序附加的元素（<code>currentTarget</code> 或 <code>this</code>）是相同的。</li>
+<li>但是，如果你<strong>点击内部 div</strong> 中的 “或者点击我” 文本，<code>event.target</code> 将是 “inner”（因为这是你点击的元素），而 <code>event.currentTarget</code>（或 <code>this</code>）仍将是 “outer”（因为这是事件处理程序附加的元素）。</li>
+</ul>
+</li>
+</ul>
+<h2 id="this-指针判定">this 指针判定</h2>
+<h3 id="这段代码会输出什么？">这段代码会输出什么？</h3>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> funObj = &#123;</span><br><span class="line">  <span class="attr">data</span>: <span class="number">200</span>,</span><br><span class="line">  <span class="attr">func</span>: <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">data</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  <span class="attr">data</span>: <span class="number">100</span>,</span><br><span class="line">  <span class="attr">func</span>: <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">    funObj.<span class="title function_">func</span>();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">funObj.<span class="title function_">func</span>(); <span class="comment">// 输出什么</span></span><br><span class="line"><span class="keyword">const</span> o = funObj.<span class="property">func</span>;</span><br><span class="line"><span class="title function_">o</span>() <span class="comment">// 输出什么</span></span><br><span class="line"></span><br><span class="line">obj.<span class="title function_">func</span>(); <span class="comment">// 输出什么</span></span><br><span class="line"><span class="keyword">const</span> f = obj.<span class="property">func</span>;</span><br><span class="line"><span class="title function_">f</span>(); <span class="comment">// 输出什么</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Output:<br>
+200<br>
+undefined<br>
+200<br>
+200</p>
+</blockquote>
+<p><strong>代码解析</strong></p>
+<ul>
+<li>
+<p><strong><code>funObj.func();</code></strong></p>
+<ul>
+<li>这里直接调用了 <code>funObj.func();</code> 方法。</li>
+<li>由于 <code>func</code> 是通过 <code>funObj</code> 调用的，因此 <code>this</code> 指向 <code>funObj</code> 对象。</li>
+<li><code>this.data</code> 访问的是 <code>funObj</code> 中的 <code>data</code> 属性，其值为 <code>200</code>。</li>
+<li><strong>输出</strong>: <code>200</code></li>
+</ul>
+</li>
+<li>
+<p><strong><code>const o = funObj.func; o();</code></strong></p>
+<ul>
+<li>这里将 <code>funObj.func</code> 赋值给了变量 <code>o</code>，然后调用了 <code>o()</code>。</li>
+<li>当 <code>o()</code> 被独立调用时，<code>this</code> 不再指向 <code>funObj</code>，而是指向全局对象（在非严格模式下）或 <code>undefined</code>（在严格模式下）。</li>
+<li>在浏览器环境中，如果 <code>this</code> 指向全局对象，全局对象的 <code>data</code> 是 <code>undefined</code>（因为全局对象通常没有 <code>data</code> 属性）。</li>
+<li><strong>输出</strong>: <code>undefined</code></li>
+</ul>
+</li>
+<li>
+<p><strong><code>obj.func();</code></strong></p>
+<ul>
+<li>这里调用了 <code>obj.func</code> 方法。</li>
+<li><code>obj.func()</code> 内部调用 <code>funObj.func()</code>，而 <code>funObj.func()</code> 是通过 <code>funObj</code> 调用的，因此 <code>this</code> 仍然指向 <code>funObj</code> 对象。</li>
+<li><strong>输出</strong>: <code>200</code></li>
+</ul>
+</li>
+<li>
+<p><strong><code>const f = obj.func; f();</code></strong></p>
+<ul>
+<li>这里将 <code>obj.func</code> 赋值给了变量 <code>f</code>，然后调用了 <code>f()</code>。</li>
+<li>由于 <code>f()</code> 被独立调用，因此在 <code>obj.func()</code> 中 <code>this</code> 指向全局对象或 <code>undefined</code>（在严格模式下）。</li>
+<li>然而，<code>func</code> 内部调用 <code>funObj.func()</code>，此调用依然通过 <code>funObj</code> 对象，因此 <code>funObj.func</code> 内部的 <code>this</code> 指向 <code>funObj</code> 对象。</li>
+<li><strong>输出</strong>: <code>200</code></li>
+</ul>
+</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://fredqinhz.github.io">Fred Qin</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://fredqinhz.github.io/posts/a9d67896.html">https://fredqinhz.github.io/posts/a9d67896.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://fredqinhz.github.io" target="_blank">Fred's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/javaScript/">javaScript</a><a class="post-meta__tags" href="/tags/this/">this</a><a class="post-meta__tags" href="/tags/%E5%8E%9F%E5%88%9B/">原创</a></div><div class="post-share"><div class="social-share" data-image="https://fredqin.oss-cn-shanghai.aliyuncs.com/cover/javascript.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>赞助</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="https://fredqin.oss-cn-shanghai.aliyuncs.com/others/weixinpay.jpg" target="_blank"><img class="post-qr-code-img" src="https://fredqin.oss-cn-shanghai.aliyuncs.com/others/weixinpay.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://fredqin.oss-cn-shanghai.aliyuncs.com/others/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="https://fredqin.oss-cn-shanghai.aliyuncs.com/others/alipay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/posts/f378e6e5.html" title="map() 高阶函数"><img class="cover" src="https://fredqin.oss-cn-shanghai.aliyuncs.com/cover/javascript.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">map() 高阶函数</div></div><div class="info-2"><div class="info-item-1">javaScript 中关于 map() 高阶函数介绍</div></div></div></a><a class="pagination-related" href="/posts/ff8dc368.html" title="var 和 let 区别"><img class="cover" src="https://fredqin.oss-cn-shanghai.aliyuncs.com/cover/javascript.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">var 和 let 区别</div></div><div class="info-2"><div class="info-item-1">变量提升机制 与 var(ES5) 和 let(ES6) 区别</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/posts/a03e68d3.html" title="回调函数"><img class="cover" src="https://fredqin.oss-cn-shanghai.aliyuncs.com/cover/javascript.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-12-29</div><div class="info-item-2">回调函数</div></div><div class="info-2"><div class="info-item-1">javaScript 中回调函数的介绍。</div></div></div></a><a class="pagination-related" href="/posts/f378e6e5.html" title="map() 高阶函数"><img class="cover" src="https://fredqin.oss-cn-shanghai.aliyuncs.com/cover/javascript.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-12-29</div><div class="info-item-2">map() 高阶函数</div></div><div class="info-2"><div class="info-item-1">javaScript 中关于 map() 高阶函数介绍</div></div></div></a><a class="pagination-related" href="/posts/4b247a57.html" title="事件循环 (Event Loop)"><img class="cover" src="https://fredqin.oss-cn-shanghai.aliyuncs.com/cover/javascript.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-12-29</div><div class="info-item-2">事件循环 (Event Loop)</div></div><div class="info-2"><div class="info-item-1">javaScript 中异步执行原理与事件循环机制等</div></div></div></a><a class="pagination-related" href="/posts/718e1ac3.html" title="Promise 对象"><img class="cover" src="https://fredqin.oss-cn-shanghai.aliyuncs.com/cover/javascript.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-12-29</div><div class="info-item-2">Promise 对象</div></div><div class="info-2"><div class="info-item-1">javaScript 中关于 Promise 对象及其使用方式的介绍。</div></div></div></a><a class="pagination-related" href="/posts/8abd83e.html" title="JavaScipt语法"><img class="cover" src="https://fredqin.oss-cn-shanghai.aliyuncs.com/cover/javascript.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-12-29</div><div class="info-item-2">JavaScipt语法</div></div><div class="info-2"><div class="info-item-1">运算符 ?? Nullish 合并运算符 空值合并运算符。如果第一个参数不为 null 或 undefined 。返回第一个参数。否则，返回第二个参数。   作用：为了弥补||运算符的缺陷。  换句话说，|| 无法区分 false、0、空字符串 &quot;&quot; 和 null/undefined。它们都一样 —— 假值（falsy values）。如果其中任何一个是 || 的第一个参数，那么我们将得到第二个参数作为结果。  不过在实际中，我们可能只想在变量的值为 null/undefined 时使用默认值。也就是说，当该值确实未知或未被设置时。   123result = a ?? b;// 使用三元运算符来实现result = (a !== null &amp;&amp; a !== undefined) ? a : b; !! 等价于 Boolean() 是一种用于将任意值转换为其对应的布尔值的一种简便方式。它实际上是两个逻辑非运算符 ! 的连用。 !!a 等价于 Boolean(a)   第一个 ! 运算符：   将其后的值转换为布尔类型。   如果值是一个“假值”...</div></div></div></a><a class="pagination-related" href="/posts/ff8dc368.html" title="var 和 let 区别"><img class="cover" src="https://fredqin.oss-cn-shanghai.aliyuncs.com/cover/javascript.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-12-29</div><div class="info-item-2">var 和 let 区别</div></div><div class="info-2"><div class="info-item-1">变量提升机制 与 var(ES5) 和 let(ES6) 区别</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="https://fredqin.oss-cn-shanghai.aliyuncs.com/others/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Fred Qin</div><div class="author-info-description">南京大学软件工程专业 21本 25硕</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">20</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/FredQinhz/FredQinhz.github.io"><i class="fab fa-github"></i><span>GitHub</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://tool.gljlw.com/qqq/?qq=814532396" target="_blank" title="QQ：814532396"><i class="fab fa-qq" style="color: #0099ff;"></i></a><a class="social-icon" href="https://fredqin.oss-cn-shanghai.aliyuncs.com/others/weixin.jpg" target="_blank" title="微信：Q_y_tiao"><i class="fab fa-weixin" style="color: #07c160;"></i></a><a class="social-icon" href="https://git.nju.edu.cn/y_tiao" target="_blank" title="南大GitLab"><i class="fab fa-gitlab" style="color: #e24329;"></i></a><a class="social-icon" href="https://space.bilibili.com/2039062003" target="_blank" title="bilibili 哔哩哔哩：y_tiao"><i class="iconfont icon-bilibili"></i></a><a class="social-icon" href="https://v.douyin.com/irFDtVGh/ 4@0.com :0pm" target="_blank" title="抖音：208784591"><i class="iconfont icon-douyinzhanghao"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#this-%E5%85%B3%E9%94%AE%E5%AD%97%E5%8E%9F%E7%90%86"><span class="toc-number">1.</span> <span class="toc-text">this 关键字原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F%E4%B8%8E%E9%9D%9E%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">严格模式与非严格模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">3.</span> <span class="toc-text">使用场景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="toc-number">3.1.</span> <span class="toc-text">全局上下文</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="toc-number">3.2.</span> <span class="toc-text">函数上下文</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%99%AE%E9%80%9A%E5%87%BD%E6%95%B0"><span class="toc-number">3.2.1.</span> <span class="toc-text">普通函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%85%85%E5%BD%93%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-number">3.2.2.</span> <span class="toc-text">函数充当对象的方法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%80%E5%B1%82%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE"><span class="toc-number">3.2.2.1.</span> <span class="toc-text">一层作用域链</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%A4%9A%E5%B1%82%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE"><span class="toc-number">3.2.2.2.</span> <span class="toc-text">多层作用域链</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0%E8%87%AA%E8%B0%83%E3%80%90%E7%AB%8B%E5%8D%B3%E8%B0%83%E7%94%A8%EF%BC%88IIFE%EF%BC%89%E3%80%91"><span class="toc-number">3.2.3.</span> <span class="toc-text">匿名函数自调【立即调用（IIFE）】</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%AD%E8%B0%83%E7%94%A8"><span class="toc-number">3.2.4.</span> <span class="toc-text">定时器中调用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8"><span class="toc-number">3.2.5.</span> <span class="toc-text">箭头函数调用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8"><span class="toc-number">3.2.6.</span> <span class="toc-text">回调函数调用</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8B%98%E8%AF%AF"><span class="toc-number">3.2.6.1.</span> <span class="toc-text">勘误</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#this%E6%8C%87%E5%90%91%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3"><span class="toc-number">3.2.6.2.</span> <span class="toc-text">this指向问题解决</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="toc-number">3.3.</span> <span class="toc-text">构造函数上下文</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E5%9E%8B%E6%96%B9%E6%B3%95%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="toc-number">3.4.</span> <span class="toc-text">原型方法上下文</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="toc-number">3.5.</span> <span class="toc-text">类上下文</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%98%BE%E5%BC%8F%E7%BB%91%E5%AE%9A-this"><span class="toc-number">3.6.</span> <span class="toc-text">显式绑定 this</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%E7%A8%8B%E5%BA%8F%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="toc-number">3.7.</span> <span class="toc-text">事件处理程序上下文</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#this-%E6%8C%87%E9%92%88%E5%88%A4%E5%AE%9A"><span class="toc-number">4.</span> <span class="toc-text">this 指针判定</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%99%E6%AE%B5%E4%BB%A3%E7%A0%81%E4%BC%9A%E8%BE%93%E5%87%BA%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">4.1.</span> <span class="toc-text">这段代码会输出什么？</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/795bec56.html" title="经典算法和例题">经典算法和例题</a><time datetime="2025-12-26T15:40:57.467Z" title="发表于 2025-12-26 23:40:57">2025-12-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/db556d7f.html" title="高级编程语言设计与实现复习">高级编程语言设计与实现复习</a><time datetime="2025-12-09T05:00:40.000Z" title="发表于 2025-12-09 13:00:40">2025-12-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/4e00debc.html" title="内蒙古乌兰布统沿线自驾">内蒙古乌兰布统沿线自驾</a><time datetime="2024-09-25T04:26:30.000Z" title="发表于 2024-09-25 12:26:30">2024-09-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/cd441b.html" title="25级南京大学工程硕博专项 —— 中国华电">25级南京大学工程硕博专项 —— 中国华电</a><time datetime="2024-09-23T07:00:30.000Z" title="发表于 2024-09-23 15:00:30">2024-09-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/848707c1.html" title="中国科学院软件研究所预推免记录">中国科学院软件研究所预推免记录</a><time datetime="2024-09-13T07:00:30.000Z" title="发表于 2024-09-13 15:00:30">2024-09-13</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2024 - 2025 By Fred Qin</span></div><div class="footer_custom_text">Hi, welcome to <a href="https://fredqinhz.github.io/">Fred's blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><script src="/js/tw_cn.js?v=5.5.3"></script><div class="js-pjax"></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

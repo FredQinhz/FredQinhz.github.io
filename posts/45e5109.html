@@ -1,0 +1,1128 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>架构设计复习及习题总结 | Fred's Blog</title><meta name="author" content="Fred Qin"><meta name="copyright" content="Fred Qin"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="架构设计部分基本是面向题目复习的，索性把习题总结一起放进来了。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="架构设计复习及习题总结">
+<meta property="og:url" content="https://fredqinhz.github.io/posts/45e5109.html">
+<meta property="og:site_name" content="Fred&#39;s Blog">
+<meta property="og:description" content="架构设计部分基本是面向题目复习的，索性把习题总结一起放进来了。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://fredqin.oss-cn-shanghai.aliyuncs.com/cover/cover0.png">
+<meta property="article:published_time" content="2024-08-17T06:20:30.000Z">
+<meta property="article:modified_time" content="2025-12-28T17:59:36.682Z">
+<meta property="article:author" content="Fred Qin">
+<meta property="article:tag" content="期末复习">
+<meta property="article:tag" content="习题">
+<meta property="article:tag" content="试卷">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://fredqin.oss-cn-shanghai.aliyuncs.com/cover/cover0.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "架构设计复习及习题总结",
+  "url": "https://fredqinhz.github.io/posts/45e5109.html",
+  "image": "https://fredqin.oss-cn-shanghai.aliyuncs.com/cover/cover0.png",
+  "datePublished": "2024-08-17T06:20:30.000Z",
+  "dateModified": "2025-12-28T17:59:36.682Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Fred Qin",
+      "url": "https://fredqinhz.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="https://fredqin.oss-cn-shanghai.aliyuncs.com/others/avatar.jpg"><link rel="canonical" href="https://fredqinhz.github.io/posts/45e5109.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.3"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: Fred Qin","link":"链接: ","source":"来源: Fred's Blog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '架构设计复习及习题总结',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/custom.css"><link rel="stylesheet" href="/css/mouse.css"><link rel="stylesheet" href="/css/icon.css"><meta name="generator" content="Hexo 7.3.0"></head><body><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+btf.addGlobalFn('pjaxSend', () => {
+  Pace.restart()
+}, 'pace_restart')
+
+</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.min.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><div class="bg-animation" id="web_bg" style="background-image: url(/url(https:/fredqin.oss-cn-shanghai.aliyuncs.com/others/cat2.jpg));"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="https://fredqin.oss-cn-shanghai.aliyuncs.com/others/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">20</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/photography/"><i class="fa-fw fas fa-camera"></i><span> 摄影</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user-md"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://fredqin.oss-cn-shanghai.aliyuncs.com/cover/cover0.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Fred's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">架构设计复习及习题总结</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/photography/"><i class="fa-fw fas fa-camera"></i><span> 摄影</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user-md"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">架构设计复习及习题总结</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-08-17T06:20:30.000Z" title="发表于 2024-08-17 14:20:30">2024-08-17</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-12-28T17:59:36.682Z" title="更新于 2025-12-29 01:59:36">2025-12-29</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/2024Spring-%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">2024Spring-软件系统设计</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">10.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>32分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><blockquote>
+<p>本文参考总结自 <a target="_blank" rel="noopener" href="https://spricoder.github.io/2021/07/15/2021-Software-System-Design/2021-Software-System-Design-Exam0-%E5%BE%80%E5%B9%B4%E8%80%83%E8%AF%95/">SpriCoder的博客</a>、<a target="_blank" rel="noopener" href="https://eaglebear2002.github.io/2023Spring-%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1-%E5%A4%8D%E4%B9%A0/">EagleBear2022 的博客</a></p>
+</blockquote>
+<h2 id="软件架构简答题">软件架构简答题</h2>
+<h3 id="1-1-软件架构介绍">1.1 软件架构介绍</h3>
+<ol>
+<li><strong>【2015】【2019】软件架构来自哪里？列举五种可能的软件架构的来源 Where do software architecture come from? List five possible sources of software architecture.</strong></li>
+</ol>
+<blockquote>
+<ol>
+<li>
+<p><strong>NFRs</strong>（Non-functional requirements <strong>非功能性需求</strong>）</p>
+</li>
+<li>
+<p><strong>ASRs</strong>（Architecture Significant Requirements <strong>架构攸关的需求</strong>）</p>
+</li>
+<li>
+<p><strong>质量需求</strong></p>
+</li>
+<li>
+<p><strong>涉众，组织</strong></p>
+</li>
+<li>
+<p><strong>技术环境</strong></p>
+</li>
+<li>
+<p><strong>业务目标</strong></p>
+</li>
+<li>
+<p><strong>商业与技术决策组合</strong></p>
+</li>
+</ol>
+</blockquote>
+<ol start="2">
+<li><strong>【2017】【2019】【2022】在设计软件时应用了哪些通用设计策略？为每个策略提供一个带有软件架构的简明工作示例。What are generic design strategies applied in designing software? Give a concise working example with software architecture for each strategy.</strong></li>
+</ol>
+<blockquote>
+<ol>
+<li>
+<p><strong>分解</strong>：针对某一个系统关注点分解后处理，比如将整个系统分解或将某个模块分解。</p>
+<ul>
+<li>质量属性可以分解，并分配给分解后的元素。</li>
+<li>如何对非 ASR 进行设计：ASR 仅意味着需求的优先级，仍然可以满足非 ASR需求来满足其他人，除非您即将满足需求、需要重新确定需求优先级并重新设计和您不能满足需求。</li>
+<li>一次设计所有的 ASR 还是一个 ASR？经验问题。通过经验和教育，我们会有直观的设计方法，并使用模式/策略来设计多个 ASR。</li>
+</ul>
+</li>
+<li>
+<p><strong>抽象</strong>：使用抽象让设计师关注本身结构而不关心实现，比如将系统抽象为组件和连接件或抽象为模块。</p>
+</li>
+<li>
+<p><strong>逐步求精 - 分而治之</strong>：对于一个大规模系统，每次聚焦一部分。将每个模块分别处理。</p>
+</li>
+<li>
+<p><strong>生成与测试</strong>：将一个特定的设计看作是一个假设；根据测试路径生成测试用例。</p>
+<ul>
+<li>将特定设计作为假设，当前假设的错误在下一次设计的假设中得到解决，而正确的谁设计得到保留。</li>
+<li>最初的假设来自于：现有系统、框架、模式与策略、设计清单（提供指导）</li>
+<li>下一个假设的生成：当前的假设、系统实现的具体情况和质量属性之间的差距、结合新选用的 Tactics。</li>
+<li>有哪些测试？根据分析技术、根据检查清单（职责分配、协作模型、数据模型、架构元素映射、资源管理、绑定时间、技术选择）</li>
+<li>什么时候完成？具有满足 ASR 的设计、或者您将使用完预算进行设计时、实施出你做出的最佳假设时。</li>
+</ul>
+</li>
+<li>
+<p><strong>迭代 - 增量细化</strong>：使用迭代的方法，ADD (Attribute-Driven Design) 方法多次迭代直到满足所有 ASR</p>
+</li>
+<li>
+<p><strong>复用元素</strong>：重用在设计过程中出现了可以复用的元素，重用现有架构</p>
+</li>
+</ol>
+</blockquote>
+<ol start="3">
+<li><strong>【2019】Architecture，structure 和 Design 的区别？</strong></li>
+</ol>
+<blockquote>
+<ol>
+<li>Design 包含 Architecture，Architecture 包含 Structure</li>
+<li>体系结构是关于软件设计的，<strong>所有体系结构都是设计</strong>，但是不是所有的设计都是体系结构，<strong>体系结构是软件设计的一个部分</strong></li>
+<li><strong>结构</strong>是<strong>静态的、逻辑的</strong>，是关于系统如何构成的</li>
+<li>体系结构除包含结构，还会包含组件之间的相关的关系结构，并定义一些动态的行为。</li>
+</ol>
+</blockquote>
+<ol start="4">
+<li><strong>【2015】【2017】简要描述软件架构过程中的一般活动，以及每个活动的主要输入和输出。Briefly describe the general activities in a software architecture process, and the major inputs and outputs at each activity.</strong></li>
+</ol>
+<blockquote>
+<ol>
+<li><strong>通过 StackHolder</strong> 获取到 <strong>ASRs</strong>（<strong>架构攸关的需求</strong>）</li>
+<li>通过分析得到 Prioritized Quality Attribute Scenarios(<strong>高优先级质量属性场景</strong>) 和 Requirements，Constraints(<strong>需求和约束</strong>)</li>
+<li>将上述部分，结合<strong>模式</strong>和<strong>决策</strong>，综合可以<strong>得到架构的设计</strong></li>
+<li>根据架构的设计得到<strong>由模式决定的候选视图的示意图</strong>，之后完成<strong>文档化</strong></li>
+<li><strong>选择、组合视图</strong>，将<strong>文档进行进一步的评估</strong>，这一部分需要 StackHolder 的参与、也需要 Prioritized Quality Attribute Scenarios 和文档等作为参考。<br>
+<img src="https://fredqin.oss-cn-shanghai.aliyuncs.com/software_design/architecture_process.png" alt=""></li>
+</ol>
+</blockquote>
+<ol>
+<li><strong>【2017】【2019】描述 4+1 视图 Describe 4+1 view（考察绘图）</strong></li>
+</ol>
+<blockquote>
+<ol>
+<li>
+<p>逻辑视图：描述了对架构而言<strong>重要的元素</strong>和他们之间的<strong>关系</strong>（<strong>功能需求</strong>）</p>
+<ul>
+<li>一般用类图或ER图来描述</li>
+</ul>
+</li>
+<li>
+<p>过程视图：描述了元素之间的<strong>并发</strong>和<strong>交互</strong></p>
+<ul>
+<li>进程视图主要从<strong>性能</strong>，<strong>可用性</strong>等一些<strong>非功能性需求</strong>的角度去<strong>描述系统</strong></li>
+</ul>
+</li>
+<li>
+<p>物理视图：描述了主要<strong>过程和组件</strong>是如何被<strong>映射</strong>到<strong>硬件</strong>上的</p>
+<ul>
+<li>部署视图：主要考虑一些<strong>非功能性的需求</strong>，比如可用性，可靠性（容错性），性能（吞吐量）以及横向扩展性</li>
+</ul>
+</li>
+<li>
+<p>开发视图：描述了软件组件的<strong>内部组织联系</strong>（比如使用配置管理工具存储）</p>
+<ul>
+<li>软件由一系列的程序库或者子系统打包而成，子系统又会根据实现需要被分成多个层次，每一层会提供一个<strong>定义完善而又简洁的接口</strong>给上层<strong>调用</strong>。</li>
+</ul>
+</li>
+<li>
+<p>用例场景(Scenarios use case)：捕获架构需求，与一个或多个特定视图相关。</p>
+</li>
+</ol>
+</blockquote>
+<p><img src="https://fredqin.oss-cn-shanghai.aliyuncs.com/software_design/architecture_design/image-1.png" alt="image-5"></p>
+<ul>
+<li>软件体系结构概念
+<ul>
+<li>Module，模块：是还没有实现出来的软件部分。</li>
+<li>Component，组件：是已经实现出来的软件部分。</li>
+<li>Connector，连接件：连接组件的部分</li>
+<li>Element，元素：包含 Component 和 Connector</li>
+</ul>
+</li>
+<li>体系结构在做什么？
+<ul>
+<li>将系统分解成组件、模块和子系统</li>
+<li>定义了通信的方式</li>
+<li>处理非功能需求</li>
+</ul>
+</li>
+<li>什么是体系结构视图？为什么使用体系结构视图？</li>
+<li>一组<strong>特定类型</strong>的<strong>系统元素</strong>和它们之间的关系表示。</li>
+<li>体系结构视图主要是为了应对软件不可见的问题，屏蔽其他没有影响的部分，将关注点分离。</li>
+<li><strong>为什么软件系统架构需要用不同的视图来文档化？</strong>
+<ul>
+<li>不同的视图支持不同的目标和用途，突出不同的系统元素和关系，在不同程度上暴露了不同的质量属性。</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-2-质量属性建模">1.2 质量属性建模</h3>
+<ul>
+<li>质量属性图<br>
+<img src="https://fredqin.oss-cn-shanghai.aliyuncs.com/software_design/architecture_design/image-3.png" alt="alt text"></li>
+</ul>
+<ol>
+<li><strong>【必考】如何进行质量属性方案建模？请使用“刺激-响应”图的格式进行建模 How to model quality attribute scenarios? Graphically model one quality attributes in “stimulus-response” format:</strong></li>
+</ol>
+<blockquote>
+<ol>
+<li><strong>刺激</strong>（Stimulus）：到达系统时需要考虑的条件。</li>
+<li><strong>刺激源</strong>（Source of Stimulus）：产生刺激的实体（人，系统或任何其他触发），可能是输入、信息等，对当前的状态的一个变化。</li>
+<li><strong>响应</strong>（Response）：刺激到来后工件开展的行为。</li>
+<li><strong>响应度量</strong>（Response Measure）：对刺激的响应以某种方法进行测量，以便可以测试需求（比如多长时间系统有反馈）</li>
+<li><strong>环境</strong>（Environment）：发生刺激时系统的状况，例如系统正常运行、系统过载、系统受到攻击、系统网络出现故障等。</li>
+<li><strong>工件</strong>（Artifact）：完成需求的整个系统或者系统的一部分（软件制品）。</li>
+</ol>
+</blockquote>
+<p><img src="https://fredqin.oss-cn-shanghai.aliyuncs.com/software_design/architecture_design/image-2.png" alt="alt text"></p>
+<table>
+<thead>
+<tr>
+<th>QA</th>
+<th>Source of Stimulus</th>
+<th>Stimulus</th>
+<th>Artifact</th>
+<th>Environment</th>
+<th>Response</th>
+<th>Response Measure</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Availability【2015】【2017】【2018】</td>
+<td>Heartbeat 监视器</td>
+<td>服务器无响应</td>
+<td>进程</td>
+<td>正常操作</td>
+<td>通知操作者继续操作</td>
+<td>没有停机时间</td>
+</tr>
+<tr>
+<td>Interoperability【2019】</td>
+<td>车辆信息系统</td>
+<td>发送当前位置</td>
+<td>路况监控系统</td>
+<td>系统在运行前已知</td>
+<td>路况监控把当前位置和其他信息合并，覆盖 Google 地图上的，并进行广播</td>
+<td>我们的信息在 99.99% 的时间是正确的</td>
+</tr>
+<tr>
+<td>Modifiability【2017】【2018】【2019】</td>
+<td>开发者</td>
+<td>希望修改 UI 界面</td>
+<td>代码</td>
+<td>设计时</td>
+<td>进行修改和单元测试</td>
+<td>在 3 小时内</td>
+</tr>
+<tr>
+<td>Performance【2015】</td>
+<td>用户</td>
+<td>发起事务</td>
+<td>系统</td>
+<td>正常操作</td>
+<td>事务被处理</td>
+<td>平均延迟不超过 2 秒</td>
+</tr>
+<tr>
+<td>Security</td>
+<td>远程的心怀不满的员工</td>
+<td>尝试修改支付率</td>
+<td>系统内数据</td>
+<td>正常操作</td>
+<td>系统维护审计追踪</td>
+<td>正确数据在一天内被恢复，并且篡改源被识别</td>
+</tr>
+<tr>
+<td>Testability</td>
+<td>单元测试者</td>
+<td>单元测试完成</td>
+<td>单元测试代码</td>
+<td>开发时</td>
+<td>捕捉结果</td>
+<td>3 小时内到达 85% 的路径覆盖</td>
+</tr>
+<tr>
+<td>Usability</td>
+<td>用户</td>
+<td>下载新应用</td>
+<td>系统</td>
+<td>运行时</td>
+<td>用户高效使用应用</td>
+<td>在 2 分钟内完成实验</td>
+</tr>
+</tbody>
+</table>
+<ol start="2">
+<li><strong>【2022】请将“可用性”定义为质量属性。MTBF 和 MTTR 代表什么？如何计算一个系统的可用性（例如，SLA）作为概率？Please define ‘Availability’ as a quality attribute. What do MTBF and MTTR stand for? How to calculate the availability of a system (e.g., SLA) as the probability? (6 points)</strong></li>
+</ol>
+<blockquote>
+<p>可将可用性计算为<strong>在指定的时间间隔内</strong>它将在要求的范围内<strong>提供指定服务的概率</strong>。</p>
+<ol>
+<li>MTBF（平均无故障时间，mean time between failures）</li>
+<li>MTTR（平均维修时间，mean time to repair）</li>
+</ol>
+<p><code>MTBF / (MTBF + MTTR)  </code></p>
+</blockquote>
+<h3 id="1-3-架构模式">1.3 架构模式</h3>
+<ol>
+<li><strong>【2015】【2017】【2018】什么区分了软件产品线架构和单个软件产品架构？What distinguishes an architecture for a software product line from an architecture for a single product?</strong></li>
+</ol>
+<blockquote>
+<ol>
+<li>产品线是<strong>产品的集合</strong></li>
+<li>单一产品体系结构只有一个产品，软件产品线体系结构有多个产品</li>
+<li>产品线的目的：实现<strong>高可重用性</strong>、<strong>高修改性</strong>。</li>
+<li>产品线之所以<strong>有效</strong>是因为通过<strong>重用</strong>可以充分利用产品的共性，从而产生经济性。</li>
+<li><strong>识别允许的变化</strong>是架构责任的一部分，同时还需要提供内建的机制来实现它们。单一产品架构对架构的变化<strong>没有说明和限制</strong>；必须在软件产品线架构中对<strong>允许进行的变化进行显式的说明和限定</strong>。</li>
+<li>.面向独立软件系统的软件体系结构设计方法并不完全适用于软件产品线体系结构的设计，因为它们一般<strong>没有考虑产品线中不同产品之间的共性和个性问题</strong>。</li>
+<li>.产品线架构可以使软件开发组织<strong>将总成本均摊</strong>到产品线的多个产品的设计开发中，从而充分地降低整体成本、有效地提高软件生产率。</li>
+</ol>
+</blockquote>
+<ol start="2">
+<li><strong>【2015】【2019】解释代理架构模式的上下文、好处和局限性。Explain the context, benefits and limitations of Broker Architecture Pattern.</strong></li>
+</ol>
+<blockquote>
+<ul>
+<li>
+<p>上下文：</p>
+<ul>
+<li><strong>多个同步或异步交互的远程对象</strong>组成的<strong>系统</strong>。broker 模式已定义了运行时组件 broker，它协调多个客户机和服务器之间的通讯。</li>
+</ul>
+</li>
+<li>
+<p>好处：</p>
+<ul>
+<li>提高了 Client 和 Server 之间的<strong>交互性</strong></li>
+<li>提高<strong>可伸缩性</strong>和<strong>可扩展性</strong></li>
+<li>解决了<strong>单体应用的性能瓶颈</strong></li>
+<li><strong>大规模集群的性能提高</strong>，但是单点性能会下降。</li>
+</ul>
+</li>
+<li>
+<p>局限性</p>
+<ul>
+<li>
+<p>代理增加了前期<strong>复杂度</strong></p>
+</li>
+<li>
+<p>可能成为<strong>通信的屏障</strong></p>
+</li>
+<li>
+<p>可能成为<strong>攻击的目标</strong></p>
+</li>
+<li>
+<p><strong>难以测试</strong></p>
+</li>
+<li>
+<p><strong>单点性能下降</strong></p>
+</li>
+</ul>
+</li>
+</ul>
+<p>SOA 延续了 broker 的思想，查找服务和使用服务都要通过 broker，而 SOA 只在查找时通过 register，分散了 broker 的职责，降低了单点风险。</p>
+</blockquote>
+<ol start="3">
+<li><strong>【2018】Layered pattern 和 Multi-tier pattern 的区别</strong></li>
+</ol>
+<blockquote>
+<ol>
+<li>Layered Pattern 是 Module Style，而 Multi-tier Pattern 是 Allocation Style</li>
+<li>Layered Pattern 是将任务拆解成一个个处于特定抽象级别的子层次，每层为下一层提供更高层次的服务，核心是关注点分离。</li>
+<li>Multi-tier Patten 中的层是逻辑的组合，没有层次模式的强依赖关系，在不同部署环境中分层不同但是软件完成的内容一致。</li>
+</ol>
+</blockquote>
+<ol start="4">
+<li><strong>【2015】描述架构设计中架构模式和决策之间的关系。给出可以在架构设计过程中使用的任何四种决策的名称，并描述每种决策的目的。Describe the relationships between architectual patterns and tactics in architecture design. Give name of any four tactics that can be used during architecture design and describe the purpose of each of them.</strong></li>
+</ol>
+<blockquote>
+<ul>
+<li>
+<p>架构模式与决策之间的关系：</p>
+<ol>
+<li><strong>决策比模式更简单</strong>，仅有单一的结构或机制来应对单一的架构驱动。</li>
+<li><strong>决策</strong>是构成架构模式的<strong>重要组成部分</strong>。</li>
+<li><strong>架构模式</strong>通常将许多个决策<strong>组合</strong>在一起。</li>
+<li>大多数架构模式<strong>都包含不同的决策</strong>，这些决策可能<strong>有共同的目的</strong>或者<strong>常被用于实现不同的质量属性</strong>。</li>
+<li>决策和架构模式<strong>共同构成了软件设计时的工具</strong>。</li>
+</ol>
+</li>
+<li>
+<p>四种决策的名称：</p>
+<ol>
+<li><strong>职责分配</strong>：将大的职责进行拆分。</li>
+<li><strong>协调模型</strong>：各部分之间的沟通与交互。</li>
+<li><strong>数据模型</strong>：数据格式、存储方式（缓存等）。</li>
+<li><strong>资源管理</strong>：CPU、网络、内存、时间等资源。</li>
+<li><strong>架构元素映射</strong>：架构元素如何映射到具体的软件实现。</li>
+<li><strong>绑定时间决策</strong>：设置时间点（这个时间点前系统还是可以变化的，但之后不可以）</li>
+<li><strong>技术选择</strong>：之前的部分已经确定后，我们可以选择的技术栈比较局限。</li>
+</ol>
+</li>
+</ul>
+</blockquote>
+<ol start="5">
+<li><strong>【2015】简要描述面向服务架构（SOA）的基本原则，并讨论 SOA 对互操作性、可伸缩性和安全性等质量属性的影响 Briefly describe the fundamental principles of Service Oriented Architecture(SOA) and discuss the impact of SOA on quality attributes like interoperability, scalability and security</strong></li>
+</ol>
+<blockquote>
+<ul>
+<li>
+<p>SOA 的基本原则：</p>
+<ol>
+<li>服务<strong>契约</strong>：服务按照描述文档所定义的服务契约行事</li>
+<li>服务<strong>封装</strong>：除了服务契约所描述内容，服务将对外部隐藏实现逻辑</li>
+<li>服务<strong>重用</strong>：将逻辑分布在不同的服务中，以提高服务的重用性</li>
+<li>服务<strong>组合</strong>：一组服务可以协调工作，组合起来形成定制组合业务需求</li>
+<li>服务<strong>自治</strong>：服务对所封装的逻辑具有控制权</li>
+<li>服务<strong>无状态</strong>：服务将一个活动所需保存的资讯最小化</li>
+</ol>
+</li>
+<li>
+<p>SOA 对互操作性的影响：</p>
+<ol>
+<li>SOA 具有更高的互操作性：SOA是Broker模式的延伸，具备 Broker 的优势。符合开放标准，可以更好的重用服务</li>
+<li>支持服务的自动识别、发现、注册和调用等等</li>
+</ol>
+</li>
+<li>
+<p>SOA 对可伸缩性的影响：</p>
+<ol>
+<li>SOA 具有更高的可伸缩性：服务自身高内聚、服务间松耦合，最小化维护的影响</li>
+<li>但是 SOA 也会带来系统复杂度较高的问题</li>
+</ol>
+</li>
+<li>
+<p>SOA 对安全性的影响：</p>
+<ol>
+<li>中间件、服务可能会成为性能的瓶颈</li>
+<li>ESB 等中间件都可以成为被攻击的目标</li>
+<li>多服务导致攻击的跟踪、溯源和防御成为困难。</li>
+</ol>
+</li>
+</ul>
+</blockquote>
+<ol start="6">
+<li>【2017】【不在授课范围】软件设计的三个变化维度，每个维度的变化点。不同的绑定时间如何影响可修改性和可测试性。</li>
+</ol>
+<blockquote>
+<ul>
+<li>三个变化维度：</li>
+<li>面向对象 OOP，强调<strong>重用性</strong>、<strong>灵活性</strong>和<strong>扩展性</strong>。</li>
+<li>面向切面 AOP，满足<strong>扩展</strong>的需求，可以在程序中自由的扩展功能</li>
+<li>面向服务 SOA，是系统<strong>发布功能</strong>的一种方式，且基于这种方式下不同的<strong>系统之间可以有效的沟通、协作</strong>。</li>
+<li><strong>设计时，开发时，测试时，发布时，运行时</strong>：这些绑定方式一次可修改性降低，可测试性升高</li>
+</ul>
+</blockquote>
+<ul>
+<li>
+<p><strong>架构模式 Architectural Patterns</strong></p>
+<ul>
+<li>
+<p>架构模式是在实践中反复发现的一套设计决策，具有允许重复使用的已知属性，并且描述了一类架构。</p>
+</li>
+<li>
+<p>关联了如下三种角色：</p>
+<ul>
+<li>
+<p><strong>背景、上下文（Context）</strong>：世界上经常发生问题的场景。</p>
+</li>
+<li>
+<p><strong>问题（Problem）</strong>：在给定上下文中出现经过适当概括的问题。</p>
+</li>
+<li>
+<p><strong>解决方案（Element + Relations + Constraints）</strong>：针对问题的成功的经过适当</p>
+<p>抽象的解决方案。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>架构模式——<strong>分层模式 Layered Pattern 模块模式</strong></p>
+<ul>
+<li>分层模式用来构造可以分解为子任务组的程序，每个子任务组都处于一个特定的抽象级别，每层都为下一个提供更高层次的服务。分层模式的<strong>关键点</strong>在于<strong>确定依赖</strong>，<strong>核心</strong>是<strong>关注点分离</strong>（必须逐层访问）</li>
+<li><strong>上下文：</strong>
+<ul>
+<li>一般桌面应用</li>
+<li>Web（OSI 的七层网络模型）</li>
+</ul>
+</li>
+<li>**优点：**高内聚、松耦合、易于维护</li>
+<li>**缺点：**降低系统的性能，导致级联修改增加开发成本。</li>
+</ul>
+</li>
+<li>
+<p>架构模式——<strong>代理模式 Broker Pattern 组件-连接器模式</strong></p>
+<ul>
+<li>
+<p>代理体系结构模式可以用于构建分布式软件系统，其中具有<strong>通过 RMI 交互的分离组件</strong>，<strong>代理组件负责协调通信</strong>，如转发请求，以及传输结果和异常。</p>
+</li>
+<li>
+<p>上下文：</p>
+<ul>
+<li><strong>多个同步或异步交互的远程对象</strong>组成的<strong>系统</strong>。broker 模式已定义了运行时组件 broker，它协调多个客户机和服务器之间的通讯。</li>
+</ul>
+</li>
+<li>
+<p>好处：</p>
+<ul>
+<li>提高了 Client 和 Server 之间的<strong>交互性</strong></li>
+<li>提高<strong>可伸缩性</strong>和<strong>可扩展性</strong></li>
+<li>解决了<strong>单体应用的性能瓶颈</strong></li>
+<li><strong>大规模集群的性能提高</strong>，但是单点性能会下降。</li>
+</ul>
+</li>
+<li>
+<p>局限性</p>
+<ul>
+<li>代理增加了前期<strong>复杂度</strong></li>
+<li>可能成为<strong>通信的屏障</strong></li>
+<li>可能成为<strong>攻击的目标</strong></li>
+<li><strong>难以测试</strong></li>
+<li><strong>单点性能下降</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>解决方案</strong>：通过提供隔离通讯相关的代理，将系统通信功能与主应用程序分开</p>
+</li>
+</ul>
+</li>
+<li>
+<p>架构模式——<strong>模型-视图-控制器模式 MVC Pattern 组件-连接器模式</strong></p>
+<ul>
+<li>使用运行时、动态、相互之间的关系来审视，集成到了开发框架中，也是分层架构的变种（强调模块间约束关系，<strong>model 不可以直接返回到 controller</strong>），分为 model（业务逻辑）、view（处理用户展示，接收用户操作）、controller（对用户操作进行处理，将信息通知给 model）</li>
+<li>优点：耦合性低，重用性高，生命周期成本低，部署快，可维护性高，方便管理</li>
+<li>缺点：没有明确定义，不适于中小型应用程序，增加实现复杂度，视图和控制器过于紧密，视图对模型访问低效。</li>
+</ul>
+</li>
+<li>
+<p>架构模式——<strong>管道和过滤模式 Pipe-and-Filter Pattern 组件-连接器模式</strong></p>
+<ul>
+<li>管道和过滤器模式应用在顺序处理结构中，有一系列 filter 体现依赖关系。</li>
+<li>Filter：相当于 Component，起数据处理、计算作用，每个 Filter 有 input 和多个output，将数据处理后传递给后续部分。</li>
+<li>Pipe：相当于 Connector，连接 filter，将 output 导入到其他的 filter 的 input 中去，不会独立存在。</li>
+<li><strong>缺点</strong>：<strong>不适用于互动式系统</strong>，过多的过滤器导致大量的计算开销。</li>
+</ul>
+</li>
+<li>
+<p>架构模式——<strong>客户端服务器模式 Client-Server Pattern 组件-连接器模式</strong></p>
+<ul>
+<li>客户端-服务器模型是一种分布式应用程序结构，它在资源或服务（称为服务器）和服务请求者（称为客户端）的提供者之间划分任务或工作负载。客户端和服务器通常通过计算机网络在单独的硬件上进行通信，但客户端和服务器可能位于同一系统中。服务器主机 运行一个或多个与客户共享资源的服务器程序。客户端不共享其任何资源，但请求服务器的内容或服务功能。因此，客户端启动与等待传入请求的服务器的通信会话。使用客户端-服务器模型的计算机应用程序的示例是电子邮件，网络打印和万维网。</li>
+<li>包含了两类不同的 Component，没有 broker 可以动态改变 Client 和 Server 的关系，成对的关系相对固定。</li>
+<li><strong>上下文：</strong>
+<ul>
+<li>Windows 的客户端应用（桌面应用）。</li>
+</ul>
+</li>
+<li><strong>缺点：</strong>
+<ul>
+<li><strong>服务器成为性能瓶颈</strong></li>
+<li><strong>可能单点失效</strong></li>
+<li>决定在哪里实现功能的决定也是复杂的（并且难以修正。）</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><strong>与 Broker Pattern 进行质量属性的影响方面的比较</strong></p>
+<p>Broker 也存在 Client 和 Server 之间的关系，但 <strong>CS 架构导致互操作性有所降低</strong>（没有 broker，需要人为制定固定连接），而 CS 不采用 broker <strong>可能导致被拦截</strong>。</p>
+<p>而在小型局域网（互联网还没有普及）时，规模有限，直接联系，性能与安全性平衡可能带来更大的收益。</p>
+</blockquote>
+</li>
+<li>
+<p>架构模式——<strong>点对点模式 Peer-to-Peer Pattern 组件-连接器模式</strong></p>
+<ul>
+<li>点对点模式中的组件，可能这一时刻为提供者，下一时刻是消费者（对等的）。同时点对点模式不仅仅提供服务，还能提供物流，每个 peer 可能有一个规定对的连接数。</li>
+<li>对等（P2P）计算或网络是分布式应用程序体系结构，用于在对等体之间划分任务或工作负载。同行在申请中享有同样的特权，等同参与者。据说它们形成了节点的点对点网络。</li>
+<li><strong>上下文</strong>：分布式应用程序体系结构，应用于对等体之间划分任务或工作负载。</li>
+<li><strong>缺点</strong>：安全性管理、数据持久化、数据/服务可用性（availability）、备份、修复更复杂、小型点对点系统不能持续实现质量目标，类似性能（performance）和可用性（availability）。</li>
+</ul>
+</li>
+<li>
+<p>架构模式——<strong>面向服务的模式 Service-Oriented Pattern，SOA 组件-连接器模式</strong></p>
+<ul>
+<li>面向服务的体系结构（SOA）是一种软件设计风格，其服务通过应用程序组件，通过网络上的通信协议提供给其他组件。</li>
+<li><strong>面向服务的体系结构的基本原则独立于供应商，产品和技术</strong>。服务是一个独立的功能单元，可以远程访问并独立操作和更新，例如在线检索信用卡对帐单。</li>
+<li>面向服务的模式是 Broker Pattern 的延伸，Component 包含服务提供者、服务消费者、ESB（企业服务总线）、企业服务组件、连接处理（注册、发现），Connector 包含SOAP、REST、Asynchronous messaging connector。</li>
+<li><strong>缺点：</strong>
+<ul>
+<li><strong>构建复杂</strong></li>
+<li><strong>无法管理独立服务的演化</strong></li>
+<li>服务可能成为<strong>性能瓶颈</strong>（无法提供性能保障）</li>
+<li>使用<strong>中间件</strong>导致的<strong>性能开销</strong>（Overhead）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>架构模式——<strong>多层模式 Multi-Tier Pattern 分配模式</strong></p>
+<ul>
+<li><strong>Layer 是真实存在的</strong>，这里的<strong>层是逻辑的组合</strong>，<strong>没有层次模式的强依赖关系</strong>，在不同的部署环境中分层不同，但是软件完成内容一致。</li>
+<li>许多系统的执行结构<strong>被组织成一组逻辑组件</strong>。每个分组被称为一个层。将组件<strong>分组到层中可能基于各种标准</strong>，例如组件的类型、共享相同的执行环境或具有相同的运行时目的。</li>
+<li><strong>上下文</strong>：旅行社。</li>
+<li><strong>缺点</strong>：<strong>大量的前期成本和复杂性</strong>。</li>
+<li>三大类：Modular 类、Runtime Process 动态类、软件和非软件环境关系（部署关系）</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>还有好多，放弃了…</p>
+<p>想了解的仔细去看PPT吧</p>
+</blockquote>
+<h3 id="1-4-架构设计">1.4 架构设计</h3>
+<ol>
+<li><strong>【2017】【2019】什么是 ASR？列出提取和识别 ASR 的四种来源和方法。What are ASR? List four sources and methods for extracting and identifying ASRs.</strong></li>
+</ol>
+<blockquote>
+<p>ASR ：<strong>架构攸关需求</strong>是对体系结构产生深远影响的需求。</p>
+<p>四种来源和方法：</p>
+<ol>
+<li>从<strong>需求文档</strong>中收集 ASR：MoSCoW 方法和用户故事</li>
+<li>通过<strong>采访涉众</strong>来收集 ASR：质量属性工作坊（QAW）</li>
+<li>通过<strong>了解业务目标</strong>来收集 ASR：</li>
+<li>通过<strong>质量属性效用树（Utility Tree）<strong>来</strong>管理</strong> ASR：通过方案量化描述需求后，逐渐对质量属性进行分解细化，直到包含量化指标为止。</li>
+</ol>
+</blockquote>
+<ol start="2">
+<li><strong>【2018】【2022】Software requirements, Quality attributes, ASRs 的区别和联系</strong></li>
+</ol>
+<blockquote>
+<ol>
+<li>软件需求包括：功能性需求和非功能性需求（又称质量需求）</li>
+<li>非功能性需求包括：技术约束、商业约束和质量属性</li>
+<li>质量属性是<strong>由软件的业务目标所决定</strong>，<strong>在功能性需求的基础上</strong>提供的整个系统的<strong>合乎需求的特性</strong>，是非功能需求的一种反应。</li>
+<li>ASRs ：架构攸关需求是对于体系结构有着深远影响的需求，肯定是<strong>软件需求的一部分</strong>。</li>
+</ol>
+</blockquote>
+<ol start="3">
+<li><strong>【2018】描述 ADD 过程</strong></li>
+</ol>
+<blockquote>
+<ol>
+<li>确定有足够的<strong>需求</strong>信息</li>
+<li>选择要<strong>分解的系统要素</strong></li>
+<li>确定所选的元素的 <strong>ASR</strong></li>
+<li>选择符合 ASR 的<strong>设计</strong>
+<ol>
+<li>找出设计<strong>问题</strong></li>
+<li><strong>列出</strong>子关注点替代<strong>模式/决策</strong></li>
+<li>从<strong>清单中选择</strong>模式/决策</li>
+<li>确定模式/决策与 ASR 之间的<strong>关系</strong></li>
+<li>记录初步的<strong>架构视图</strong></li>
+<li>评估并解决<strong>不一致</strong>的问题</li>
+</ol>
+</li>
+<li><strong>实例化</strong>架构元素并<strong>分配职责</strong></li>
+<li>为实例化的元素<strong>定义接口</strong></li>
+<li><strong>验证和细化</strong>需求并使它们成为实例化元素的<strong>约束</strong></li>
+<li><strong>重复</strong>进行 2-7 步直到满足所有的 ASR</li>
+</ol>
+</blockquote>
+<h3 id="1-5-软件架构视图和文档化">1.5 软件架构视图和文档化</h3>
+<ol>
+<li><strong>【2015】【2017】【2019】【2022】为什么软件系统架构需要使用不同视图来文档化？给出 4 种示例视图的名称和目的。Why should a software architecture be documented using different different views? Give the name and purposes of 4 example views.</strong></li>
+</ol>
+<blockquote>
+<ul>
+<li>
+<p>原因：</p>
+</li>
+<li>
+<p>不同视图<strong>支持不同的目标和用户</strong>，<strong>突出不同的系统元素和关系</strong></p>
+</li>
+<li>
+<p>不同视图<strong>将不同质量属性暴露出不同的程度</strong></p>
+</li>
+<li>
+<p>4种视图</p>
+</li>
+<li>
+<p>结构视图：如下<br>
+| Views Styles                        | 描述                                                         | 示例                                                         |<br>
+| ----------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |<br>
+| <strong>Module Styles（模块视图）</strong>       | 它是如何构建为一组实现单元的？How it is structured as a set of implementation units?<br />每个架构文档<strong>至少</strong>包含一个<br />模块是<strong>提供一组连贯职责的实现单元</strong> | 分解视图、使用视图、泛化视图、分层视图、领域视图、数据模型视图 |<br>
+| <strong>Component-connector(C&amp;C) Styles</strong> | 它是如何构建为<strong>一组具有运行时行为和交互的元素</strong>的？How it is structured as a set of elements that have runtime behavior and interactions?<br /><strong>显示具有某些运行时存在的元素</strong>，例如进程、对象、客户端、服务器和数据存储（组件）。<br />附件知识有哪些连接器连接到哪些组件，通过将连接器的端点连接到组件的端口来显示附件。 | 管道-过滤器视图、客户端-服务器视图、点对点视图、面向服务视图、发布-订阅视图 |<br>
+| <strong>Allocation Styles</strong>               | 它与环境中的非软件结构有何关系？How it relates to non-software structures in its environment?<br />分配视图<strong>描述了软件单元到软件开发或执行环境元素的映射</strong><br />分配视图目标是将软件元素所需的属性与环境元素提供的属性比较，以确定分配是否成功。<br />分配视图可以描述静态或动态视图。 | 部署视图、安装视图、工作分配视图、其他分配视图               |</p>
+</li>
+<li>
+<p><strong>质量视图</strong> Quality Views：安全视图、性能视图、可靠性视图、通信视图、异常（错误处理）视图</p>
+</li>
+<li>
+<p><strong>组合视图</strong> Combining Views：</p>
+<ul>
+<li>包括各种 C&amp;C 视图、带有 SOA 或通信进程视图的部署视图、分解视图和任何工作分配、实施、使用或分层视图。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<ol start="2">
+<li><strong>【2015】【2017】将以下每个问题（左侧）与解决该问题的架构风格/视图（右侧）对应起来。列出每个样式类别的四个视图。Map each of the following questions (on the left) with the architectural style/view (on the right) that addresses the question. List four views of each category of style.</strong></li>
+</ol>
+<blockquote>
+<p>见上图</p>
+</blockquote>
+<ol start="3">
+<li><strong>【2017】【2019】典型的软件架构文档包中应该包含哪些内容？简要描述每个组件及其目的。What should be included in a typical software architecture documentation package? Briefly describe each component and its purpose.</strong></li>
+</ol>
+<blockquote>
+<p>文档应包含 视图 View 和 视图之外 Beyond 两部分内容。</p>
+<ul>
+<li>View部分
+<ul>
+<li>styles and views（架构风格和视图）
+<ul>
+<li>它是如何构建为一组实现单元的？Module Styles</li>
+<li>它是如何构建为一组运行时行为和交互的元素的？Component-Connector Styles</li>
+<li>它与环境中的非软件结构有何关系？Allocation Style</li>
+</ul>
+</li>
+<li>Structural views
+<ol>
+<li>module views</li>
+<li>C &amp; C views</li>
+<li>Allocation views</li>
+</ol>
+</li>
+<li>Quality Views</li>
+<li>Combining Views</li>
+</ul>
+</li>
+<li>Beyond部分
+<ul>
+<li><strong>文档路线图</strong>：包含了范围和总结、简单摘要等。</li>
+<li>视图的<strong>文档组织方式</strong>：描述了本文档中视图是如何组织的。</li>
+<li><strong>系统概述</strong>：从整体上描述了当前架构的简要说明、业务目标（驱动因素）等等。</li>
+<li>视图之间的<strong>映射关系</strong>：描述了不同视图之间的映射关系。</li>
+<li><strong>系统原理</strong>：从整体上描述了当前架构的设计原理。</li>
+<li><strong>目录-索引</strong>、<strong>词汇表</strong>、<strong>首字母缩略词表</strong>。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h3 id="1-6-架构评估">1.6 架构评估</h3>
+<ol>
+<li>【2015】【2017】描述架构权衡分析方法（ATAM）过程的每个阶段生成的输出。Describe the outputs generated from each phase of Architecture Tradeoff Analysis Method(ATAM) process.</li>
+</ol>
+<blockquote>
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>输出</th>
+<th>参与者</th>
+<th>职责</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>阶段-0：准备和建立团队</td>
+<td>输入：架构设计文档 <br />输出：评估计划</td>
+<td>评估团队领导和关键项目决策者</td>
+<td>根据架构设计文档生成评估计划，包括谁参加评估、如何何时何地开展评估、最后评估报告会被呈递给谁。</td>
+</tr>
+<tr>
+<td>阶段-1：评估-1</td>
+<td>1. 架构的简明介绍 <br />2. 业务目标（驱动因素）的阐释 <br />3. 质量属性要求的优先级列表 <br />4. Utility Tree 效用树 <br />5. 风险和无风险点 <br />6. 敏感和权衡点</td>
+<td>评估团队和项目决策者</td>
+<td>第一步，评估负责人介绍 ATAM 方法 <br />第二步，项目经理或客户从业务角度介绍业务驱动因素 <br />第三步，首席架构师介绍体系结构 <br />第四步，评估团队确定架构方法 <br />第五步，评估团队和项目决策者生成质量属性效用树（Utiltiy Tree）<br />第六步，评估团队分析架构方法</td>
+</tr>
+<tr>
+<td>阶段-2：评估-2</td>
+<td>1. 涉众们的优先级场景列表 <br />2. 风险主题和每一个受到威胁的业务驱动因素</td>
+<td>评估团队、项目决策者和项目涉众</td>
+<td>第一步，评估负责人介绍 ATAM 方法和之前已经取得的成果<br /> 第七步，涉众头脑风暴并确定场景优先级<br /> 第八步，评估团队分析架构方法，类似第六步<br /> 第九步，评估团队展示评估结果，并呈递给涉众</td>
+</tr>
+<tr>
+<td>阶段-3：后续</td>
+<td>最终的评估报告</td>
+<td>评估团队、主要涉众</td>
+<td>评估团队制作最终评估报告，发给主要涉众审核通过后，将报告呈递给委托评估的人。</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<ol start="2">
+<li>【2019】描述在 ATAM 的每一个过程中 有哪些 Stakeholder 和他们的职责</li>
+</ol>
+<blockquote>
+<p>见上表</p>
+</blockquote>
+<ol start="3">
+<li>【2018】软件架构的关注点有哪些？利益相关方有哪些？</li>
+</ol>
+<blockquote>
+<ul>
+<li>
+<p>软件架构的关注点：</p>
+<ol>
+<li><strong>利益相关者</strong> Stakeholders addressed</li>
+<li><strong>解决的问题</strong> Concerns addressed</li>
+<li>语言，建模技巧 Language, modeling techniques</li>
+<li><strong>决策，模式</strong> Tactics, Pattern</li>
+</ol>
+</li>
+<li>
+<p>利益相关方：</p>
+<ol>
+<li>顾客 Customer</li>
+<li>用户 User</li>
+<li>架构师 Architect</li>
+<li>需求工程师 Requirements engineer</li>
+<li>设计师 Designer</li>
+<li>实施者 Implementer</li>
+<li>测试师，集成师 Tester, integrator</li>
+<li>维护者 Maintainer</li>
+<li>产品经理 Product manager</li>
+<li>质量保证人 Quality assurance people</li>
+</ol>
+</li>
+</ul>
+</blockquote>
+<ol start="4">
+<li><strong>【2018】【2019】【2022】Risks，Senstivity Points，Trade-Off Points 分别是什么？各举一个例子。What are the risks, sensitivity points, and trade-off points associated with software architecture? Give an example for each of them.</strong></li>
+</ol>
+<blockquote>
+<ol>
+<li>识别<strong>风险</strong>：发现可能<strong>对所需质量属性产生负面影响</strong>的架构决策，例如使用分层模式可能带来性能损耗。</li>
+<li>发现<strong>权衡</strong>：<strong>影响多个质量属性</strong>的架构决策，例如使用分层模式可能会带来性能损耗，但是也会解耦增加系统的可修改性。</li>
+<li>发现<strong>敏感点</strong>：<strong>特定质量属性对其敏感</strong>的架构决策，比如在对性能敏感的系统中，决定使用缓存中间件。</li>
+</ol>
+</blockquote>
+<h3 id="1-7-微服务架构">1.7 微服务架构</h3>
+<ol>
+<li><strong>【2019】微服务架构（MSA）和 SOA 的区别，相同点：</strong></li>
+</ol>
+<blockquote>
+<ol>
+<li>相同点：微服务和 SOA 都是<strong>分布式架构</strong>，<strong>微服务是 SOA 的一种扩展</strong>，都包含了服务契约、服务封装、服务重用、服务组合、服务自治和服务无状态等基本特点。</li>
+<li>微服务<strong>去掉</strong>了 SOA 架构中的 <strong>ESB</strong>，采用**轻量级通信机制（HTTP、REST）**进行服务之间的通信。</li>
+<li>微服务的管理和部署<strong>结合 DevOps 实现自动化</strong>，可以对服务进行自动化部署和监控预警。</li>
+<li>微服务引入了 <strong>API 网关</strong>、对客户端屏蔽访问各项服务的问题。</li>
+<li>微服务引入了<strong>熔断器</strong>：避免出现服务失效或网络问题等导致的级联故障。</li>
+<li><strong>SOA</strong> 使用<strong>全局数据模型并共享数据库</strong>；<strong>MSA</strong> 每个服务<strong>有自己的数据模型和数据库</strong></li>
+<li>SOA 服务是<strong>较大的单体应用</strong>；MSA 提供<strong>较小的服务</strong></li>
+</ol>
+</blockquote>
+<ol start="2">
+<li><strong>【2023 预测】微服务架构的主要特性：</strong></li>
+</ol>
+<blockquote>
+<ol>
+<li>通过<strong>服务组件化</strong>
+<ul>
+<li>服务作为进程外组件，通过Web服务请求或 RPC机制通信</li>
+</ul>
+</li>
+<li>服务内部<strong>高内聚</strong>，服务间<strong>低耦合</strong></li>
+<li><strong>围绕业务能力组织，而不是聚焦在技术层面</strong>。传统软件系统开发管理通常聚焦在技术层面</li>
+<li><strong>去中心化</strong>
+<ul>
+<li>去中心化<strong>治理</strong>：构建微服务时可以有服务自己的技术栈选择</li>
+<li>去中心化数据<strong>存储</strong>：让每个微服务管理自己的数据库</li>
+<li>去中心化数据<strong>管理</strong>：强调服务间的无事务协作，最终一致性和补偿策略</li>
+</ul>
+</li>
+<li><strong>基础设施自动化</strong>：依赖自动化的基础设施，降低开发和运维微服务的操作复杂度</li>
+<li>服务<strong>高可用性设计</strong>、<strong>演进式设计</strong>
+<ul>
+<li>高可用设计：完善的监控和日志记录</li>
+<li>演进式设计：合理设计实现频繁、快速且控制良好的增量变更和演化</li>
+</ul>
+</li>
+<li>每个服务相对较小并容易维护</li>
+<li>服务可以独立扩展</li>
+<li>技术栈不受限</li>
+<li>大型复杂程序可以持续部署和交付</li>
+<li>高可伸缩</li>
+</ol>
+</blockquote>
+<ul>
+<li><strong>部署复杂性</strong>：
+<ul>
+<li><strong>应选择支持服务要求的最轻量级部署模式：Serverless &lt; 容器 &lt; 虚拟机……</strong><br>
+<img src="https://fredqin.oss-cn-shanghai.aliyuncs.com/software_design/architecture_design/image-4.png" alt="alt text"></li>
+<li><strong>部署模式列表</strong>
+<ul>
+<li>单主机部署多个服务实例 ：资源相冲突的风险； 依赖版本冲突的风险</li>
+<li>单主机部署单个服务实例 ：资源利用率低</li>
+<li>将服务部署到虚拟机 ：资源利用率较低（整台虚拟机）；部署速度相对较慢（分钟级）；系统管理的额外开销（操作系统、运行补丁）</li>
+<li>将服务部署到容器 ：大量的容器镜像管理工作；基础设施不如虚拟机的丰富</li>
+<li>服务部署平台：额外技术学习和资源成本</li>
+<li>无服务器部署：长尾延迟；基于有限事件与请求的编程模型，不用于长时间运行的服务</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="软件详细设计">软件详细设计</h2>
+<ol>
+<li><strong>【2017】请至少说出三个面向对象的原则，并解释它们如何应用于策略模式？ Please name at least three Object-Oriented principles, and explain how they are applied in Strategy pattern?</strong></li>
+</ol>
+<blockquote>
+<ul>
+<li><strong>单一职责原则</strong>：在策略模式中，每个具体的策略类都实现了一个特定的算法或策略。<strong>每个策略类都有单一的责任</strong>，即实现其定义的算法逻辑。这确保了每个类在变化时只需修改自己的算法，不会影响其他策略或上下文对象。</li>
+<li><strong>开闭原则</strong>：在策略模式中，这意味着可以通过定义新的具体策略类来扩展系统的行为，而不需要修改已有代码。上下文类通过接口与策略类进行交互，从而实现了对变化的封闭（通过接口定义的方式），对扩展的开放（可以添加新的策略类）。</li>
+<li><strong>依赖倒置原则</strong>：在策略模式中，上下文类依赖于一个抽象的策略接口，而不是具体的策略实现类。这样，上下文类与具体的策略实现解耦，这种松耦合的设计有助于系统的灵活性和可维护性。</li>
+<li><strong>里氏代换原则</strong>：上下文类与所有的具体策略类都是通过一个共同的接口或抽象类进行交互，上下文类不关心使用哪个具体策略，只要它们实现了策略接口即可。这种设计确保了不同的策略可以被无缝地替换，而上下文类无需修改。</li>
+<li>合成复用原则</li>
+</ul>
+</blockquote>
+<ol start="2">
+<li><strong>【2019】设计模式是什么？举例说明类模式和对象模式的区别？</strong></li>
+</ol>
+<blockquote>
+<ul>
+<li>设计模式定义：<strong>设计模式（Design Pattern）<strong>是一套</strong>被反复使用</strong>、<strong>多数人知晓的</strong>、<strong>经过分类编目的</strong>、<strong>代码设计经验的总结</strong>，使用设计模式是为了可重用代码、让代码更容易被他人理解、保证代码可靠性。</li>
+<li>区别：根据<strong>范围</strong>，可分为类模式和对象模式两种
+<ul>
+<li>类模式处理<strong>类和子类之间的关系</strong>，这些关系<strong>通过继承建立</strong>，在编译时刻就被确定下来，是属于<strong>静态的</strong>。</li>
+<li>对象模式处理<strong>对象间的关系</strong>，这些关系在运行时刻变化，更具<strong>动态性</strong>。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<ol start="3">
+<li>【2019】防御式编程是什么？断言和错误处理的区别？【不考】</li>
+</ol>
+<blockquote>
+<ol>
+<li>可以预见到（至少预先推测到）问题所在，断定代码中每个阶段可能出现的错误，并作出相应的防范措施，来防止类似的意外的发生。</li>
+<li>断言和错误处理的区别</li>
+<li>断言是在开发期间使用的、让程序在运行时进行自检的代码，是对开发人员的警告，通常是一个子程序或宏。断言不可以有副作用。</li>
+<li>错误处理是对预先已经考虑到的错误（如用户错误、程序错误、意外情况等等）按照流程进行处理。</li>
+</ol>
+</blockquote>
+<ol start="4">
+<li><strong>【2019】设计模式对 MVC 的影响？</strong></li>
+</ol>
+<blockquote>
+<ul>
+<li>MVC 模式使用了运行时、动态和相互之间的关系集成到开发框架中，是分层模式的变种。
+<ul>
+<li>分为 model（业务逻辑）、view（处理用户展示，接收用户操作）、controller（对用户操作进行处理，将信息通知给 model）（强调模块间约束关系，model 不可以直接返回到 controller）</li>
+<li>优点：耦合性低，重用性高，生命周期成本低，部署快，可维护性高，方便管理</li>
+<li>缺点：没有明确定义，不适于中小型应用程序，增加实现复杂度，视图和控制器过于紧密，视图对模型访问低效。</li>
+</ul>
+</li>
+<li>MVC 模式是<strong>观察者模式</strong>、<strong>策略模式</strong>和<strong>组合模式</strong>的演化，可能涉及到工厂模式和装饰器模式
+<ul>
+<li>基于<strong>推送-订阅</strong>模式</li>
+<li><strong>观察者模式</strong>：model 发生变化通知 controller，然后更新 view</li>
+<li><strong>策略模式</strong>：controllers 帮助 views 对不同用户的输入做不同的响应。</li>
+<li><strong>组合模式</strong>：一组 views</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<ol start="5">
+<li><strong>【2019】策略模式和状态模式的区别？</strong></li>
+</ol>
+<blockquote>
+<ol>
+<li>在状态模式中，<strong>具体状态类的方法参数中包含上下文对象</strong>，需要<strong>在状态处理完成后完成状态切换</strong>。</li>
+<li>在策略模式中，直接对上下文类调用 set 方法设置策略即可，<strong>不涉及到策略的切换</strong>。</li>
+</ol>
+</blockquote>
+<ol start="6">
+<li><strong>【2019】最小知识原则在设计模式中的应用？</strong></li>
+</ol>
+<blockquote>
+<ol>
+<li>中介者模式【对象行为型模式】</li>
+<li>外观模式【对象结构型模式】</li>
+</ol>
+</blockquote>
+<ol start="7">
+<li>【2022】Please explain the Liskov Substitution Principle and how it contributes to the Open- Closed Principle. (6 points)</li>
+<li>【2022】Please explain how the Factory Method Pattern and Abstract Factory Pattern adhere to the Open-Closed Principle. (6 points)</li>
+<li>【2022】What is the benefit of decoupling the Receiver from the Invoker in the Command Pattern? (6 points) 4.There are two methods for propagating data to observers with the Observer design pattern: the push model and the pull model. Why would one model be preferable over the other? What are the trade-offs of each model? (6 points)</li>
+<li>【2022】What is the difference between the categories of Creational Patterns and Structural Patterns? What categories do Prototype and Flyweight fall into,respectively? Explain why.(6 points)</li>
+</ol>
+<h3 id="设计题">设计题</h3>
+<ol>
+<li>【2019】一个游戏，有几种人类角色：骑士、骑兵、步兵，持有不同的武器（矛、剑、斧），拥有 fight 方法；有一个非人类角色巨魔，可以持有武器，但攻击方法不同（beat）。现在希望让巨魔和其他人类角色一起进行游戏，并且要求有角色死亡时其他活着的角色要收到通知。运用设计模式进行设计，并画出类图。</li>
+<li>【2018】设计一个飞行模拟软件，要求能模拟多种飞机的特性。为了在将来支持更多飞机种类，要求使用策略模式。画出架构图和类图</li>
+<li>【2019】一个买票系统的设计题，不同的角色有不同的打折方案，用策略模式设计， 最后画图，还要说明策略模式的使用场景。</li>
+<li>【2015】【2019】<br>
+<img src="https://fredqin.oss-cn-shanghai.aliyuncs.com/software_design/exam1.png" alt=""><br>
+<img src="https://fredqin.oss-cn-shanghai.aliyuncs.com/software_design/exam2.png" alt=""></li>
+</ol>
+<h2 id="其他架构设计总结">其他架构设计总结</h2>
+<blockquote>
+<p>by Zhy</p>
+</blockquote>
+<h3 id="系统架构">系统架构</h3>
+
+
+	<div class="row">
+    <embed src="/pdf/软件系统设计-系统架构（简）.pdf" width="100%" height="550" type="application/pdf">
+	</div>
+
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://fredqinhz.github.io">Fred Qin</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://fredqinhz.github.io/posts/45e5109.html">https://fredqinhz.github.io/posts/45e5109.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://fredqinhz.github.io" target="_blank">Fred's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/">期末复习</a><a class="post-meta__tags" href="/tags/%E4%B9%A0%E9%A2%98/">习题</a><a class="post-meta__tags" href="/tags/%E8%AF%95%E5%8D%B7/">试卷</a></div><div class="post-share"><div class="social-share" data-image="https://fredqin.oss-cn-shanghai.aliyuncs.com/cover/cover0.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>赞助</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="https://fredqin.oss-cn-shanghai.aliyuncs.com/others/weixinpay.jpg" target="_blank"><img class="post-qr-code-img" src="https://fredqin.oss-cn-shanghai.aliyuncs.com/others/weixinpay.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://fredqin.oss-cn-shanghai.aliyuncs.com/others/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="https://fredqin.oss-cn-shanghai.aliyuncs.com/others/alipay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/posts/4b247a57.html" title="事件循环 (Event Loop)"><img class="cover" src="https://fredqin.oss-cn-shanghai.aliyuncs.com/cover/javascript.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">事件循环 (Event Loop)</div></div><div class="info-2"><div class="info-item-1">javaScript 中异步执行原理与事件循环机制等</div></div></div></a><a class="pagination-related" href="/posts/5db50ef3.html" title="设计模式复习"><img class="cover" src="https://fredqin.oss-cn-shanghai.aliyuncs.com/cover/cover1.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">设计模式复习</div></div><div class="info-2"><div class="info-item-1">设计模式部分总结，请结合其他复习资料食用 :)</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/posts/d7c515c7.html" title="软件质量管理-往年卷"><img class="cover" src="https://fredqin.oss-cn-shanghai.aliyuncs.com/cover/cover1.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-12-29</div><div class="info-item-2">软件质量管理-往年卷</div></div><div class="info-2"><div class="info-item-1">较全的软件质量管理往年卷集合了</div></div></div></a><a class="pagination-related" href="/posts/db556d7f.html" title="高级编程语言设计与实现复习"><img class="cover" src="https://fredqin.oss-cn-shanghai.aliyuncs.com/cover/cover0.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-12-29</div><div class="info-item-2">高级编程语言设计与实现复习</div></div><div class="info-2"><div class="info-item-1">高级编程语言设计与实现复习总结</div></div></div></a><a class="pagination-related" href="/posts/5db50ef3.html" title="设计模式复习"><img class="cover" src="https://fredqin.oss-cn-shanghai.aliyuncs.com/cover/cover1.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-12-29</div><div class="info-item-2">设计模式复习</div></div><div class="info-2"><div class="info-item-1">设计模式部分总结，请结合其他复习资料食用 :)</div></div></div></a><a class="pagination-related" href="/posts/3d5fd5b5.html" title="软件质量管理-复习"><img class="cover" src="https://fredqin.oss-cn-shanghai.aliyuncs.com/cover/cover0.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-12-29</div><div class="info-item-2">软件质量管理-复习</div></div><div class="info-2"><div class="info-item-1">软件质量管理期末重点总结【纲要 + 展开】</div></div></div></a><a class="pagination-related" href="/posts/ab6f1cb2.html" title="架构设计部分大纲"><img class="cover" src="https://fredqin.oss-cn-shanghai.aliyuncs.com/cover/cover0.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-12-29</div><div class="info-item-2">架构设计部分大纲</div></div><div class="info-2"><div class="info-item-1">依旧是软院传统英文纲要 —— 架构设计部分大纲</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="https://fredqin.oss-cn-shanghai.aliyuncs.com/others/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Fred Qin</div><div class="author-info-description">南京大学软件工程专业 21本 25硕</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">20</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/FredQinhz/FredQinhz.github.io"><i class="fab fa-github"></i><span>GitHub</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://tool.gljlw.com/qqq/?qq=814532396" target="_blank" title="QQ：814532396"><i class="fab fa-qq" style="color: #0099ff;"></i></a><a class="social-icon" href="https://fredqin.oss-cn-shanghai.aliyuncs.com/others/weixin.jpg" target="_blank" title="微信：Q_y_tiao"><i class="fab fa-weixin" style="color: #07c160;"></i></a><a class="social-icon" href="https://git.nju.edu.cn/y_tiao" target="_blank" title="南大GitLab"><i class="fab fa-gitlab" style="color: #e24329;"></i></a><a class="social-icon" href="https://space.bilibili.com/2039062003" target="_blank" title="bilibili 哔哩哔哩：y_tiao"><i class="iconfont icon-bilibili"></i></a><a class="social-icon" href="https://v.douyin.com/irFDtVGh/ 4@0.com :0pm" target="_blank" title="抖音：208784591"><i class="iconfont icon-douyinzhanghao"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E7%AE%80%E7%AD%94%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">软件架构简答题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 软件架构介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E8%B4%A8%E9%87%8F%E5%B1%9E%E6%80%A7%E5%BB%BA%E6%A8%A1"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 质量属性建模</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.3.</span> <span class="toc-text">1.3 架构模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1"><span class="toc-number">1.4.</span> <span class="toc-text">1.4 架构设计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5-%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E8%A7%86%E5%9B%BE%E5%92%8C%E6%96%87%E6%A1%A3%E5%8C%96"><span class="toc-number">1.5.</span> <span class="toc-text">1.5 软件架构视图和文档化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-6-%E6%9E%B6%E6%9E%84%E8%AF%84%E4%BC%B0"><span class="toc-number">1.6.</span> <span class="toc-text">1.6 架构评估</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-7-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84"><span class="toc-number">1.7.</span> <span class="toc-text">1.7 微服务架构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BD%AF%E4%BB%B6%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1"><span class="toc-number">2.</span> <span class="toc-text">软件详细设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E8%AE%A1%E9%A2%98"><span class="toc-number">2.1.</span> <span class="toc-text">设计题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E6%80%BB%E7%BB%93"><span class="toc-number">3.</span> <span class="toc-text">其他架构设计总结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84"><span class="toc-number">3.1.</span> <span class="toc-text">系统架构</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/795bec56.html" title="经典算法和例题">经典算法和例题</a><time datetime="2025-12-26T15:40:57.467Z" title="发表于 2025-12-26 23:40:57">2025-12-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/db556d7f.html" title="高级编程语言设计与实现复习">高级编程语言设计与实现复习</a><time datetime="2025-12-09T05:00:40.000Z" title="发表于 2025-12-09 13:00:40">2025-12-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/4e00debc.html" title="内蒙古乌兰布统沿线自驾">内蒙古乌兰布统沿线自驾</a><time datetime="2024-09-25T04:26:30.000Z" title="发表于 2024-09-25 12:26:30">2024-09-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/cd441b.html" title="25级南京大学工程硕博专项 —— 中国华电">25级南京大学工程硕博专项 —— 中国华电</a><time datetime="2024-09-23T07:00:30.000Z" title="发表于 2024-09-23 15:00:30">2024-09-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/848707c1.html" title="中国科学院软件研究所预推免记录">中国科学院软件研究所预推免记录</a><time datetime="2024-09-13T07:00:30.000Z" title="发表于 2024-09-13 15:00:30">2024-09-13</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2024 - 2025 By Fred Qin</span></div><div class="footer_custom_text">Hi, welcome to <a href="https://fredqinhz.github.io/">Fred's blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><script src="/js/tw_cn.js?v=5.5.3"></script><div class="js-pjax"></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
