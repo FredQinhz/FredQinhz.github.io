@@ -1,107 +1,20 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>分类: 笔试机考 | Fred's Blog</title><meta name="author" content="Fred Qin"><meta name="copyright" content="Fred Qin"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website"><meta property="og:title" content="Fred&#39;s Blog"><meta property="og:url" content="https://fredqinhz.github.io/categories/%E7%AC%94%E8%AF%95%E6%9C%BA%E8%80%83/index.html"><meta property="og:site_name" content="Fred&#39;s Blog"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://fredqin.oss-cn-shanghai.aliyuncs.com/others/avatar.jpg"><meta property="article:author" content="Fred Qin"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://fredqin.oss-cn-shanghai.aliyuncs.com/others/avatar.jpg"><script type="application/ld+json"></script><link rel="shortcut icon" href="https://fredqin.oss-cn-shanghai.aliyuncs.com/others/avatar.jpg"><link rel="canonical" href="https://fredqinhz.github.io/categories/%E7%AC%94%E8%AF%95%E6%9C%BA%E8%80%83/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//busuanzi.ibruce.info"><link rel="stylesheet" href="/css/index.css?v=5.5.3"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>(() => {
-      
-    const saveToLocal = {
-      set: (key, value, ttl) => {
-        if (!ttl) return
-        const expiry = Date.now() + ttl * 86400000
-        localStorage.setItem(key, JSON.stringify({ value, expiry }))
-      },
-      get: key => {
-        const itemStr = localStorage.getItem(key)
-        if (!itemStr) return undefined
-        const { value, expiry } = JSON.parse(itemStr)
-        if (Date.now() > expiry) {
-          localStorage.removeItem(key)
-          return undefined
-        }
-        return value
-      }
-    }
-
-    window.btf = {
-      saveToLocal,
-      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
-        const script = document.createElement('script')
-        script.src = url
-        script.async = true
-        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
-        script.onload = script.onreadystatechange = () => {
-          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
-        }
-        script.onerror = reject
-        document.head.appendChild(script)
-      }),
-      getCSS: (url, id) => new Promise((resolve, reject) => {
-        const link = document.createElement('link')
-        link.rel = 'stylesheet'
-        link.href = url
-        if (id) link.id = id
-        link.onload = link.onreadystatechange = () => {
-          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
-        }
-        link.onerror = reject
-        document.head.appendChild(link)
-      }),
-      addGlobalFn: (key, fn, name = false, parent = window) => {
-        if (!false && key.startsWith('pjax')) return
-        const globalFn = parent.globalFn || {}
-        globalFn[key] = globalFn[key] || {}
-        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
-        parent.globalFn = globalFn
-      }
-    }
-  
-      
-      const activateDarkMode = () => {
-        document.documentElement.setAttribute('data-theme', 'dark')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
-        }
-      }
-      const activateLightMode = () => {
-        document.documentElement.setAttribute('data-theme', 'light')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
-        }
-      }
-
-      btf.activateDarkMode = activateDarkMode
-      btf.activateLightMode = activateLightMode
-
-      const theme = saveToLocal.get('theme')
-    
-          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
-        
-      
-      const asideStatus = saveToLocal.get('aside-status')
-      if (asideStatus !== undefined) {
-        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
-      }
-    
-      
-    const detectApple = () => {
-      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
-        document.documentElement.classList.add('apple')
-      }
-    }
-    detectApple()
-  
-    })()</script><script>const GLOBAL_CONFIG = {
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>分类: 笔试机考 | Fred's Blog</title><meta name="author" content="Fred Qin"><meta name="copyright" content="Fred Qin"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website"><meta property="og:title" content="Fred&#39;s Blog"><meta property="og:url" content="https://fredqinhz.github.io/categories/%E7%AC%94%E8%AF%95%E6%9C%BA%E8%80%83/index.html"><meta property="og:site_name" content="Fred&#39;s Blog"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://fredqin.oss-cn-shanghai.aliyuncs.com/others/avatar.jpg"><meta property="article:author" content="Fred Qin"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://fredqin.oss-cn-shanghai.aliyuncs.com/others/avatar.jpg"><link rel="shortcut icon" href="https://fredqin.oss-cn-shanghai.aliyuncs.com/others/avatar.jpg"><link rel="canonical" href="https://fredqinhz.github.io/categories/%E7%AC%94%E8%AF%95%E6%9C%BA%E8%80%83/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//busuanzi.ibruce.info"><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload='this.media="all"'><script>const GLOBAL_CONFIG = {
   root: '/',
   algolia: undefined,
   localSearch: undefined,
   translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
-  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
   copy: {
     success: '复制成功',
-    error: '复制失败',
+    error: '复制错误',
     noSupport: '浏览器不支持'
   },
   relativeDate: {
     homepage: false,
     post: false
   },
-  runtime: '',
+  runtime: '天',
   dateSuffix: {
     just: '刚刚',
     min: '分钟前',
@@ -110,24 +23,120 @@
     month: '个月前'
   },
   copyright: {"limitCount":50,"languages":{"author":"作者: Fred Qin","link":"链接: ","source":"来源: Fred's Blog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
-  lightbox: 'null',
+  lightbox: 'fancybox',
   Snackbar: undefined,
   infinitegrid: {
-    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
     buttonText: '加载更多'
   },
   isPhotoFigcaption: false,
-  islazyloadPlugin: false,
+  islazyload: false,
   isAnchor: false,
   percent: {
     toc: true,
     rightside: false,
   },
   autoDarkmode: false
-}</script><script id="config-diff">var GLOBAL_CONFIG_SITE={title:"分类: 笔试机考",isHighlightShrink:!1,isToc:!1,pageType:"category"}</script><link rel="stylesheet" href="/css/custom.css"><link rel="stylesheet" href="/css/mouse.css"><link rel="stylesheet" href="/css/icon.css"><meta name="generator" content="Hexo 7.3.0"></head><body><script>window.paceOptions = {
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE={title:"分类: 笔试机考",isPost:!1,isHome:!1,isHighlightShrink:!1,isToc:!1,postUpdate:"2025-12-29 02:52:50"}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css"><link rel="stylesheet" href="/css/mouse.css"><link rel="stylesheet" href="/css/icon.css"><meta name="generator" content="Hexo 7.3.0"></head><body><script>window.paceOptions = {
   restartOnPushState: false
 }
 
-btf.addGlobalFn('pjaxSend', () => {
+document.addEventListener('pjax:send', () => {
   Pace.restart()
-}, 'pace_restart')</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.min.css"><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><div class="bg-animation" id="web_bg" style="background-image:url('/url(https:/fredqin.oss-cn-shanghai.aliyuncs.com/others/cat2.jpg)')"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="https://fredqin.oss-cn-shanghai.aliyuncs.com/others/avatar.jpg" onerror='this.onerror=null,this.src="/img/friend_404.gif"' alt="avatar"></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">20</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i> <span>首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i> <span>归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i> <span>标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i> <span>分类</span></a></div><div class="menus_item"><a class="site-page" href="/photography/"><i class="fa-fw fas fa-camera"></i> <span>摄影</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i> <span>友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user-md"></i> <span>关于我</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="not-home-page" id="page-header" style="background:0 0"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Fred's Blog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i> <span>首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i> <span>归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i> <span>标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i> <span>分类</span></a></div><div class="menus_item"><a class="site-page" href="/photography/"><i class="fa-fw fas fa-camera"></i> <span>摄影</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i> <span>友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user-md"></i> <span>关于我</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="page-site-info"><h1 id="site-title">笔试机考</h1></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="post_cover left"><a href="/posts/795bec56.html" title="经典算法和例题"><img class="post-bg" src="https://fredqin.oss-cn-shanghai.aliyuncs.com/cover/cover1.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' alt="经典算法和例题"></a></div><div class="recent-post-info"><a class="article-title" href="/posts/795bec56.html" title="经典算法和例题">经典算法和例题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-12-26T15:40:57.467Z" title="发表于 2025-12-26 23:40:57">2025-12-26</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AC%94%E8%AF%95%E6%9C%BA%E8%80%83/">笔试机考</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E7%AE%97%E6%B3%95/">算法</a></span></div><div class="content">代码随想录 先贴个大佬链接 代码随想录网站链接 经典算法 BFS 广度优先搜索 一般过程 可以分为四个步骤： 初始化（初始化队列和所求的值） -&gt; 判空取队头（判断是否为空并取出队头） -&gt; 拓展（利用队头去扩展） -&gt; 判断入队（如果符合，将该点入队）。 1234567891011121314void bfs()&#123; queue&lt;int&gt;q; q.push(初始位置); //初始化 while(q.size())&#123; int t = q.front(); q.pop();//取出队头的点，用该点向周围扩散。 if(check(j))&#123; //如果该点可行就将它加入队列中 q.psuh(j); //实施相应的操作 &#125; &#125; &#125; 如果是对图进行广度搜索，则可以建立一个邻接表，以优化枚举时间。 如果需要记录路径，则可以设定一个路...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/posts/321f9cbf.html" title="CPP语法"><img class="post-bg" src="https://fredqin.oss-cn-shanghai.aliyuncs.com/cover/cpp.png" onerror='this.onerror=null,this.src="/img/404.jpg"' alt="CPP语法"></a></div><div class="recent-post-info"><a class="article-title" href="/posts/321f9cbf.html" title="CPP语法">CPP语法</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-08-07T08:06:03.000Z" title="发表于 2024-08-07 16:06:03">2024-08-07</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AC%94%E8%AF%95%E6%9C%BA%E8%80%83/">笔试机考</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E8%AF%AD%E8%A8%80/">语言</a></span></div><div class="content">CPP的一些基础语法，以及如何使用等。</div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="https://fredqin.oss-cn-shanghai.aliyuncs.com/others/avatar.jpg" onerror='this.onerror=null,this.src="/img/friend_404.gif"' alt="avatar"></div><div class="author-info-name">Fred Qin</div><div class="author-info-description">南京大学软件工程专业 21本 25硕</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">20</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/FredQinhz/FredQinhz.github.io"><i class="fab fa-github"></i><span>GitHub</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://tool.gljlw.com/qqq/?qq=814532396" target="_blank" title="QQ：814532396"><i class="fab fa-qq" style="color:#09f"></i></a><a class="social-icon" href="https://fredqin.oss-cn-shanghai.aliyuncs.com/others/weixin.jpg" target="_blank" title="微信：Q_y_tiao"><i class="fab fa-weixin" style="color:#07c160"></i></a><a class="social-icon" href="https://git.nju.edu.cn/y_tiao" target="_blank" title="南大GitLab"><i class="fab fa-gitlab" style="color:#e24329"></i></a><a class="social-icon" href="https://space.bilibili.com/2039062003" target="_blank" title="bilibili 哔哩哔哩：y_tiao"><i class="iconfont icon-bilibili"></i></a><a class="social-icon" href="https://v.douyin.com/irFDtVGh/ 4@0.com :0pm" target="_blank" title="抖音：208784591"><i class="iconfont icon-douyinzhanghao"></i></a></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/795bec56.html" title="经典算法和例题">经典算法和例题</a><time datetime="2025-12-26T15:40:57.467Z" title="发表于 2025-12-26 23:40:57">2025-12-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/db556d7f.html" title="高级编程语言设计与实现复习">高级编程语言设计与实现复习</a><time datetime="2025-12-09T05:00:40.000Z" title="发表于 2025-12-09 13:00:40">2025-12-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/4e00debc.html" title="内蒙古乌兰布统沿线自驾">内蒙古乌兰布统沿线自驾</a><time datetime="2024-09-25T04:26:30.000Z" title="发表于 2024-09-25 12:26:30">2024-09-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/cd441b.html" title="25级南京大学工程硕博专项 —— 中国华电">25级南京大学工程硕博专项 —— 中国华电</a><time datetime="2024-09-23T07:00:30.000Z" title="发表于 2024-09-23 15:00:30">2024-09-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/848707c1.html" title="中国科学院软件研究所预推免记录">中国科学院软件研究所预推免记录</a><time datetime="2024-09-13T07:00:30.000Z" title="发表于 2024-09-13 15:00:30">2024-09-13</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline"><i class="fas fa-folder-open"></i> <span>分类</span></div><ul class="card-category-list" id="aside-cat-list"><li class="card-category-list-item"><a class="card-category-list-link" href="/categories/2024Spring-%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/"><span class="card-category-list-name">2024Spring-软件系统设计</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item"><a class="card-category-list-link" href="/categories/2024Spring-%E8%BD%AF%E4%BB%B6%E8%B4%A8%E9%87%8F%E7%AE%A1%E7%90%86/"><span class="card-category-list-name">2024Spring-软件质量管理</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item"><a class="card-category-list-link" href="/categories/2025Autumn-%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/"><span class="card-category-list-name">2025Autumn-高级编程语言设计与实现</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item"><a class="card-category-list-link" href="/categories/javaScript/"><span class="card-category-list-name">javaScript</span><span class="card-category-list-count">7</span></a></li><li class="card-category-list-item"><a class="card-category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/"><span class="card-category-list-name">前端</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item"><a class="card-category-list-link" href="/categories/%E6%9D%82%E9%A1%B9/"><span class="card-category-list-name">杂项</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item"><a class="card-category-list-link" href="/categories/%E7%AC%94%E8%AF%95%E6%9C%BA%E8%80%83/"><span class="card-category-list-name">笔试机考</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item"><a class="card-category-list-link" href="/categories/%E9%A2%84%E6%8E%A8%E5%85%8D/"><span class="card-category-list-name">预推免</span><span class="card-category-list-count">2</span></a></li></ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/" style="font-size:1.35em;color:#46b994">期末复习</a><a href="/tags/%E4%B9%A0%E9%A2%98/" style="font-size:1.25em;color:#32964f">习题</a><a href="/tags/%E8%AF%95%E5%8D%B7/" style="font-size:1.25em;color:#6a3238">试卷</a><a href="/tags/javaScript/" style="font-size:1.45em;color:#9c6972">javaScript</a><a href="/tags/%E5%87%BD%E6%95%B0/" style="font-size:1.15em;color:#64c44e">函数</a><a href="/tags/%E8%AF%AD%E8%A8%80/" style="font-size:1.25em;color:#45c755">语言</a><a href="/tags/this/" style="font-size:1.15em;color:#4eb33e">this</a><a href="/tags/%E5%8E%9F%E5%88%9B/" style="font-size:1.25em;color:#3d3532">原创</a><a href="/tags/%E5%8F%98%E9%87%8F%E5%A3%B0%E6%98%8E/" style="font-size:1.15em;color:#537fa3">变量声明</a><a href="/tags/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/" style="font-size:1.15em;color:#78899f">事件循环</a><a href="/tags/%E5%BC%82%E6%AD%A5/" style="font-size:1.15em;color:#647b92">异步</a><a href="/tags/%E8%87%AA%E9%A9%BE%E6%B8%B8/" style="font-size:1.15em;color:#32be32">自驾游</a><a href="/tags/%E4%B9%8C%E5%85%B0%E5%B8%83%E7%BB%9F/" style="font-size:1.15em;color:#3ba7bc">乌兰布统</a><a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size:1.25em;color:#324e32">算法</a><a href="/tags/%E9%A2%84%E6%8E%A8%E5%85%8D/" style="font-size:1.25em;color:#323247">预推免</a><a href="/tags/ISCAS/" style="font-size:1.15em;color:#b8b66c">ISCAS</a><a href="/tags/%E5%B7%A5%E7%A8%8B%E7%A1%95%E5%8D%9A/" style="font-size:1.15em;color:#7f3232">工程硕博</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i> <span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/12/"><span class="card-archive-list-date">十二月 2025</span> <span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/09/"><span class="card-archive-list-date">九月 2024</span> <span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/08/"><span class="card-archive-list-date">八月 2024</span> <span class="card-archive-list-count">14</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">20</div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">212.7k</div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastpushdate="2025-12-28T18:10:09.892Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2024 - 2025 By Fred Qin</span></div><div class="footer_custom_text">Hi, welcome to <a href="https://fredqinhz.github.io/">Fred's blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><script src="/js/tw_cn.js?v=5.5.3"></script><div class="js-pjax"></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/fireworks.min.js"></script><script defer id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
+})</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.min.css"><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://fredqin.oss-cn-shanghai.aliyuncs.com/others/avatar.jpg" onerror='onerror=null,src="/img/friend_404.gif"' alt="avatar"></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">20</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><hr class="custom-hr"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i> <span>首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i> <span>归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i> <span>标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i> <span>分类</span></a></div><div class="menus_item"><a class="site-page" href="/photography/"><i class="fa-fw fas fa-camera"></i> <span>摄影</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i> <span>友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user-md"></i> <span>关于我</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="not-home-page" id="page-header" style="background:0 0"><nav id="nav"><span id="blog-info"><a href="/" title="Fred's Blog"><span class="site-name">Fred's Blog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i> <span>首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i> <span>归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i> <span>标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i> <span>分类</span></a></div><div class="menus_item"><a class="site-page" href="/photography/"><i class="fa-fw fas fa-camera"></i> <span>摄影</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i> <span>友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user-md"></i> <span>关于我</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="page-site-info"><h1 id="site-title">笔试机考</h1></div></header><main class="layout" id="content-inner"><div class="recent-posts category_ui" id="recent-posts"><div class="recent-post-item"><div class="post_cover left"><a href="/posts/795bec56.html" title="经典算法和例题"><img class="post-bg" src="https://fredqin.oss-cn-shanghai.aliyuncs.com/cover/cover1.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' alt="经典算法和例题"></a></div><div class="recent-post-info"><a class="article-title" href="/posts/795bec56.html" title="经典算法和例题">经典算法和例题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-12-26T15:40:57.467Z" title="发表于 2025-12-26 23:40:57">2025-12-26</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AC%94%E8%AF%95%E6%9C%BA%E8%80%83/">笔试机考</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E7%AE%97%E6%B3%95/">算法</a></span></div><div class="content">代码随想录 先贴个大佬链接 代码随想录网站链接 经典算法 BFS 广度优先搜索 一般过程 可以分为四个步骤： 初始化（初始化队列和所求的值） -&gt; 判空取队头（判断是否为空并取出队头） -&gt; 拓展（利用队头去扩展） -&gt; 判断入队（如果符合，将该点入队）。 1234567891011121314void bfs()&#123; queue&lt;int&gt;q; q.push(初始位置); //初始化 while(q.size())&#123; int t = q.front(); q.pop();//取出队头的点，用该点向周围扩散。 if(check(j))&#123; //如果该点可行就将它加入队列中 q.psuh(j); //实施相应的操作 &#125; &#125; &#125; 如果是对图进行广度搜索，则可以建立一个邻接表，以优化枚举时间。 如果需要记录路径，则可以设定一个路径的队 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/posts/321f9cbf.html" title="CPP语法"><img class="post-bg" src="https://fredqin.oss-cn-shanghai.aliyuncs.com/cover/cpp.png" onerror='this.onerror=null,this.src="/img/404.jpg"' alt="CPP语法"></a></div><div class="recent-post-info"><a class="article-title" href="/posts/321f9cbf.html" title="CPP语法">CPP语法</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-08-07T08:06:03.000Z" title="发表于 2024-08-07 16:06:03">2024-08-07</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AC%94%E8%AF%95%E6%9C%BA%E8%80%83/">笔试机考</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E8%AF%AD%E8%A8%80/">语言</a></span></div><div class="content">CPP的一些基础语法，以及如何使用等。</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://fredqin.oss-cn-shanghai.aliyuncs.com/others/avatar.jpg" onerror='this.onerror=null,this.src="/img/friend_404.gif"' alt="avatar"></div><div class="author-info__name">Fred Qin</div><div class="author-info__description">南京大学软件工程专业 21本 25硕</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">20</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/FredQinhz/FredQinhz.github.io"><i class="fab fa-github"></i><span>GitHub</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://tool.gljlw.com/qqq/?qq=814532396" target="_blank" title="QQ：814532396"><i class="fab fa-qq" style="color:#09f"></i></a><a class="social-icon" href="https://fredqin.oss-cn-shanghai.aliyuncs.com/others/weixin.jpg" target="_blank" title="微信：Q_y_tiao"><i class="fab fa-weixin" style="color:#07c160"></i></a><a class="social-icon" href="https://git.nju.edu.cn/y_tiao" target="_blank" title="南大GitLab"><i class="fab fa-gitlab" style="color:#e24329"></i></a><a class="social-icon" href="https://space.bilibili.com/2039062003" target="_blank" title="bilibili 哔哩哔哩：y_tiao"><i class="iconfont icon-bilibili"></i></a><a class="social-icon" href="https://v.douyin.com/irFDtVGh/ 4@0.com :0pm" target="_blank" title="抖音：208784591"><i class="iconfont icon-douyinzhanghao"></i></a></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/795bec56.html" title="经典算法和例题">经典算法和例题</a><time datetime="2025-12-26T15:40:57.467Z" title="发表于 2025-12-26 23:40:57">2025-12-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/db556d7f.html" title="高级编程语言设计与实现复习">高级编程语言设计与实现复习</a><time datetime="2025-12-09T05:00:40.000Z" title="发表于 2025-12-09 13:00:40">2025-12-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/4e00debc.html" title="内蒙古乌兰布统沿线自驾">内蒙古乌兰布统沿线自驾</a><time datetime="2024-09-25T04:26:30.000Z" title="发表于 2024-09-25 12:26:30">2024-09-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/cd441b.html" title="25级南京大学工程硕博专项 —— 中国华电">25级南京大学工程硕博专项 —— 中国华电</a><time datetime="2024-09-23T07:00:30.000Z" title="发表于 2024-09-23 15:00:30">2024-09-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/848707c1.html" title="中国科学院软件研究所预推免记录">中国科学院软件研究所预推免记录</a><time datetime="2024-09-13T07:00:30.000Z" title="发表于 2024-09-13 15:00:30">2024-09-13</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline"><i class="fas fa-folder-open"></i> <span>分类</span></div><ul class="card-category-list" id="aside-cat-list"><li class="card-category-list-item"><a class="card-category-list-link" href="/categories/2024Spring-%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/"><span class="card-category-list-name">2024Spring-软件系统设计</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item"><a class="card-category-list-link" href="/categories/2024Spring-%E8%BD%AF%E4%BB%B6%E8%B4%A8%E9%87%8F%E7%AE%A1%E7%90%86/"><span class="card-category-list-name">2024Spring-软件质量管理</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item"><a class="card-category-list-link" href="/categories/2025Autumn-%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/"><span class="card-category-list-name">2025Autumn-高级编程语言设计与实现</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item"><a class="card-category-list-link" href="/categories/javaScript/"><span class="card-category-list-name">javaScript</span><span class="card-category-list-count">7</span></a></li><li class="card-category-list-item"><a class="card-category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/"><span class="card-category-list-name">前端</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item"><a class="card-category-list-link" href="/categories/%E6%9D%82%E9%A1%B9/"><span class="card-category-list-name">杂项</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item"><a class="card-category-list-link" href="/categories/%E7%AC%94%E8%AF%95%E6%9C%BA%E8%80%83/"><span class="card-category-list-name">笔试机考</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item"><a class="card-category-list-link" href="/categories/%E9%A2%84%E6%8E%A8%E5%85%8D/"><span class="card-category-list-name">预推免</span><span class="card-category-list-count">2</span></a></li></ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/" style="font-size:1.35em;color:#6543ad">期末复习</a><a href="/tags/%E4%B9%A0%E9%A2%98/" style="font-size:1.25em;color:#6cc428">习题</a><a href="/tags/%E8%AF%95%E5%8D%B7/" style="font-size:1.25em;color:#207f1d">试卷</a><a href="/tags/javaScript/" style="font-size:1.45em;color:#7dad27">javaScript</a><a href="/tags/%E5%87%BD%E6%95%B0/" style="font-size:1.15em;color:#016cb5">函数</a><a href="/tags/%E8%AF%AD%E8%A8%80/" style="font-size:1.25em;color:#62487f">语言</a><a href="/tags/this/" style="font-size:1.15em;color:#285b51">this</a><a href="/tags/%E5%8E%9F%E5%88%9B/" style="font-size:1.25em;color:#5942c8">原创</a><a href="/tags/%E5%8F%98%E9%87%8F%E5%A3%B0%E6%98%8E/" style="font-size:1.15em;color:#894cbd">变量声明</a><a href="/tags/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/" style="font-size:1.15em;color:#418389">事件循环</a><a href="/tags/%E5%BC%82%E6%AD%A5/" style="font-size:1.15em;color:#82b674">异步</a><a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size:1.25em;color:#958d9d">算法</a><a href="/tags/%E8%87%AA%E9%A9%BE%E6%B8%B8/" style="font-size:1.15em;color:#9a9d68">自驾游</a><a href="/tags/%E4%B9%8C%E5%85%B0%E5%B8%83%E7%BB%9F/" style="font-size:1.15em;color:#be3f3e">乌兰布统</a><a href="/tags/%E9%A2%84%E6%8E%A8%E5%85%8D/" style="font-size:1.25em;color:#0d0118">预推免</a><a href="/tags/ISCAS/" style="font-size:1.15em;color:#4b821b">ISCAS</a><a href="/tags/%E5%B7%A5%E7%A8%8B%E7%A1%95%E5%8D%9A/" style="font-size:1.15em;color:#23106d">工程硕博</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/12/"><span class="card-archive-list-date">十二月 2025</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/09/"><span class="card-archive-list-date">九月 2024</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/08/"><span class="card-archive-list-date">八月 2024</span><span class="card-archive-list-count">14</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">20</div></div><div class="webinfo-item"><div class="item-name">已运行时间 :</div><div class="item-count" id="runtimeshow" data-publishdate="2024-08-05T16:00:00.000Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">212.7k</div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastpushdate="2025-12-28T18:52:49.808Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer" style="background:0 0"><div id="footer-wrap"><div class="copyright">&copy;2024 - 2025 By Fred Qin</div><div class="framework-info"><span>框架</span> <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题</span> <a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to <a href="https://fredqinhz.github.io/">Fred's blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="/js/tw_cn.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/fireworks.min.js"></script><script defer id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
